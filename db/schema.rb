@@ -10,9 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_25_021412) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_25_031534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "challenges", force: :cascade do |t|
+    t.jsonb "content", default: {}
+    t.jsonb "conversation", default: {}
+    t.bigint "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_challenges_on_topic_id"
+  end
+
+  create_table "grammar_points", force: :cascade do |t|
+    t.string "title"
+    t.string "level"
+    t.text "explanation"
+    t.text "examples"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.text "content"
+    t.text "feedback"
+    t.boolean "conversation_status", default: false
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.bigint "partnership_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_journals_on_challenge_id"
+    t.index ["partnership_id"], name: "index_journals_on_partnership_id"
+    t.index ["user_id"], name: "index_journals_on_user_id"
+  end
+
+  create_table "partnership_topics", force: :cascade do |t|
+    t.bigint "partnership_id", null: false
+    t.bigint "topic_id", null: false
+    t.string "status", default: "not started"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partnership_id"], name: "index_partnership_topics_on_partnership_id"
+    t.index ["topic_id"], name: "index_partnership_topics_on_topic_id"
+  end
+
+  create_table "partnerships", force: :cascade do |t|
+    t.bigint "user_one_id", null: false
+    t.bigint "user_two_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_one_id"], name: "index_partnerships_on_user_one_id"
+    t.index ["user_two_id"], name: "index_partnerships_on_user_two_id"
+  end
+
+  create_table "topic_grammar_points", force: :cascade do |t|
+    t.bigint "topic_id", null: false
+    t.bigint "grammar_point_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grammar_point_id"], name: "index_topic_grammar_points_on_grammar_point_id"
+    t.index ["topic_id"], name: "index_topic_grammar_points_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name"
+    t.jsonb "content", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +90,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_021412) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "native_language"
+    t.string "learning_language"
+    t.string "learning_level"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "challenges", "topics"
+  add_foreign_key "journals", "challenges"
+  add_foreign_key "journals", "partnerships"
+  add_foreign_key "journals", "users"
+  add_foreign_key "partnership_topics", "partnerships"
+  add_foreign_key "partnership_topics", "topics"
+  add_foreign_key "partnerships", "users", column: "user_one_id"
+  add_foreign_key "partnerships", "users", column: "user_two_id"
+  add_foreign_key "topic_grammar_points", "grammar_points"
+  add_foreign_key "topic_grammar_points", "topics"
 end
