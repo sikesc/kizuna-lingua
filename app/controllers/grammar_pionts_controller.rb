@@ -1,0 +1,2 @@
+class GrammarPiontsController < ApplicationController
+end
