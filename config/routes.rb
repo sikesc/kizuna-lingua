@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "dashboard", to: "pages#dashboard"
   resources :topics, only: [:index, :show]
-  resources :journals, only: [:update]
+  resources :journals, only: [:update] do
+    member do
+      patch :complete_conversation
+    end
+  end
   resources :grammar_points, only: [:show]
   resources :challenges, only: [:show] do
     resources :journals, only: [:create]
