@@ -9,8 +9,6 @@
         <%= topic.name %>
       </li>
 
-      <%= topic.partnership_topics.find_by(partnership: @partnership).status %>
-
       <div class="modal fade" id="itemModal-<%= topic.id %>" tabindex="-1" aria-labelledby="itemModalLabel-<%= topic.id %>" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
