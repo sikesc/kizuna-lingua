@@ -16,6 +16,7 @@ class TopicsController < ApplicationController
   end
 
   def generate
+    authorize Topic, :generate?
     topic_title = params[:topic][:name]
     result = TopicGenerationService.call(current_user, topic_title)
     if result[:success]
