@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin: 40px;
+    margin: 40px auto;
 }
 
 .card {
@@ -23,7 +23,7 @@
     /* Keep existing styling */
     border-radius: 25px;
     color: #fff;
-    background: linear-gradient(135deg,#372549,#774C60);
+    background: linear-gradient(120deg,#372549,#774C60);
     box-shadow: 0 5px 10px #160f1d,0 5px 10px #1d1317;
     transition: transform 0.3s ease
 }
