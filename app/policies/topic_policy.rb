@@ -15,4 +15,8 @@ class TopicPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def generate?
+    user.present? # Only logged-in users can generate topics
+  end
 end
