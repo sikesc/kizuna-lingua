@@ -6,7 +6,7 @@ class TopicGenerationService
   def initialize(user, topic_title)
     @user = user
     @topic_title = topic_title
-    @llm = RubyLLM.chat(model: ENV["AI_MODEL"])
+    @llm = RubyLLM.chat
   end
 
   def call
