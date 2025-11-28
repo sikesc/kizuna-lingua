@@ -32,7 +32,7 @@ class JournalsController < ApplicationController
   def update
     authorize @journal
     if @journal.update(journal_params)
-      redirect_to partnership_journals_path(@journal.partnership), notice: 'Feedback was successfully submitted.'
+      redirect_to dashboard_path, notice: 'Feedback was successfully submitted.'
     else
       render :show, status: :unprocessable_entity
     end
