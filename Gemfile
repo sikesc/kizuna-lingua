@@ -79,3 +79,4 @@ end
 gem 'ostruct'
 gem 'pundit'
 gem "ruby_llm", "~> 1.2.0"
+gem 'cloudinary', '~> 1.16.0'
