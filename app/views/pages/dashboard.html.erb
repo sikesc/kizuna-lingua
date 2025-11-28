@@ -1,4 +1,23 @@
-<div class="container">
+<header class="top-bar">
+  <div class="top-bar__content">
+    <div class="top-bar__title">Welcome <%= current_user.name %></div>
+    <div class="top-bar__avatar">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, alt: "Avatar image" %>
+      <% else %>
+        <%= image_tag "user.png", alt: "text" %>
+      <% end %>
+    </div>
+    <div class="top-bar-partner-avatar">
+      <% if @partner.photo.attached? %>
+        <%= cl_image_tag @partner.photo.key, alt: "Partner Avatar image" %>
+      <% else %>
+        <%= image_tag "user.png", alt: "text" %>
+      <% end %>
+    </div>
+  </div>
+</header>
+<div class="container content-area-pushed-down">
   <% if @most_recent_topic %>
     <div class="topic-background-box mb-3">
       <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do %>

@@ -9,6 +9,33 @@ puts "database cleaned"
 puts "Creating Users"
 john = User.create!(email: "test@mail.com", password: "123456", password_confirmation: "123456", name: "John", native_language: "english", learning_language: "japanese", learning_level: "intermediate")
 aki = User.create!(email: "testjpn@mail.com", password: "123456", password_confirmation: "123456", name: "Aki", native_language: "japanese", learning_language: "english", learning_level: "fluent")
+ASSETS_PATH = Rails.root.join("app", "assets", "images")
+john_image_path = ASSETS_PATH.join("john.jpg")
+if File.exist?(john_image_path)
+  File.open(john_image_path, 'rb') do |file|
+    john.photo.attach(
+      io: file,
+      filename: "john.jpg",
+      content_type: "image/jpeg"
+    )
+    puts "Attached photo to John."
+  end
+else
+  puts "Skipped attaching photo to John: file not found at #{john_image_path}"
+end
+aki_image_path = ASSETS_PATH.join("aki.jpg")
+if File.exist?(aki_image_path)
+  File.open(aki_image_path, 'rb') do |file|
+    aki.photo.attach(
+      io: file,
+      filename: "aki.jpg",
+      content_type: "image/jpeg"
+    )
+    puts "Attached photo to Aki."
+  end
+else
+  puts "Skipped attaching photo to Aki: file not found at #{aki_image_path}"
+end
 partnership = Partnership.new
 partnership.user_one = john
 partnership.user_two = aki
