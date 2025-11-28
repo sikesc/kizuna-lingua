@@ -7,8 +7,8 @@ User.destroy_all
 puts "database cleaned"
 
 puts "Creating Users"
-john = User.create!(email: "test@mail.com", password: "123456", password_confirmation: "123456", name: "John KizunaEng", native_language: "english", learning_language: "japanese", learning_level: "intermediate")
-aki = User.create!(email: "testjpn@mail.com", password: "123456", password_confirmation: "123456", name: "Aki KizunaJpn", native_language: "japanese", learning_language: "english", learning_level: "fluent")
+john = User.create!(email: "test@mail.com", password: "123456", password_confirmation: "123456", name: "John", native_language: "english", learning_language: "japanese", learning_level: "intermediate")
+aki = User.create!(email: "testjpn@mail.com", password: "123456", password_confirmation: "123456", name: "Aki", native_language: "japanese", learning_language: "english", learning_level: "fluent")
 partnership = Partnership.new
 partnership.user_one = john
 partnership.user_two = aki
@@ -45,22 +45,6 @@ social = Topic.create!(
   content: {
     eng: "In this topic, you will talk about how you connect with others—friends, coworkers, partners—and how you spend time together. This helps you express feelings, preferences, and personal interactions in Japanese.",
     jpn: "このトピックでは、友人や同僚、パートナーなど他の人との関わり方や一緒に過ごす時間について話します。英語で気持ちや好み、人とのやり取りを説明する練習になります。"
-  }
-)
-
-family = Topic.create!(
-  name: "Family & Relationships",
-  content: {
-    eng: "In this topic, you’ll describe the important people in your life and talk about how you spend time together. This helps you practice describing relationships and explaining connections in Japanese.",
-    jpn: "このトピックでは、あなたの家族や大切な人について紹介し、どのように一緒に過ごしているかを話します。英語で人間関係や家族構成を説明する練習になります。"
-  }
-)
-
-hobbies = Topic.create!(
-  name: "Hobbies & Free Time",
-  content: {
-    eng: "Talk about the activities you enjoy in your free time. Whether it's sports, music, games, or creative interests, this topic helps you express what you like to do and why in Japanese.",
-    jpn: "このトピックでは、自由な時間に楽しんでいる趣味や活動について話します。スポーツでも音楽でもゲームでも、自分の好きなことを英語で説明し、その理由を伝える練習になります。"
   }
 )
 
