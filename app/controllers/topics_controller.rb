@@ -27,6 +27,16 @@ class TopicsController < ApplicationController
                             .where(level_conditions, *level_values)
                             .where(language: user_language)
 
+    @user_level_terms = level_search_terms
+
+    level_order = ['n5', 'n4', 'a1', 'a2', 'beginner', 'n3', 'n2', 'b1', 'b2', 'intermediate', 'n1', 'c1', 'c2', 'advanced', 'fluent']
+
+    @all_grammar_points_by_level = @topic.grammar_points
+                                         .where(language: user_language)
+                                         .group_by(&:level)
+                                         .sort_by { |level, _| level_order.index(level.downcase) || 999 }
+                                         .to_h
+
     @challenge = @topic.challenges.first
     @journal = Journal.new
     authorize @topic
