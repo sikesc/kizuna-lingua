@@ -23,6 +23,9 @@ class JournalsController < ApplicationController
     authorize @journal
 
     if @journal.save
+      if @journal.user.partner.present?
+        JournalSubmittedNotification.with(journal: @journal).deliver(@journal.user.partner)
+      end
       redirect_to partnership_journals_path(current_user.partnership), notice: "Journal was created successfully."
     else
       render :new, status: :unprocessable_entity
@@ -32,6 +35,9 @@ class JournalsController < ApplicationController
   def update
     authorize @journal
     if @journal.update(journal_params)
+      if journal_params[:feedback].present? && @journal.user != current_user
+        JournalFeedbackNotification.with(journal: @journal).deliver(@journal.user)
+      end
       redirect_to dashboard_path, notice: 'Feedback was successfully submitted.'
     else
       render :show, status: :unprocessable_entity
@@ -53,6 +59,13 @@ class JournalsController < ApplicationController
     else
       redirect_to dashboard_path, alert: "Failed to mark conversation as complete."
     end
+  end
+
+  def remind_partner
+    @journal = Journal.find(params[:id])
+    authorize @journal, :remind_partner? # Authorize with a new policy method
+    JournalReminderNotification.with(journal: @journal).deliver(@journal.user)
+    redirect_to dashboard_path, notice: "Reminder sent to your partner for the journal!"
   end
 
   private
