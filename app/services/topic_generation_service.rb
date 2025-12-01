@@ -103,6 +103,9 @@ class TopicGenerationService
         },
         "grammar_points": [ { "title": "...", "level": "...", "explanation": "...", "examples": "...", "language": "..." } ]
       }
+      CRITICAL RULE: NO FOREIGN CHARACTERS IN TITLES
+      - The "title" of any grammar point MUST ONLY contain characters from the language of the grammar point (English/Latin alphabet for "english" points, Japanese characters for "japanese" points).
+      - **DO NOT** include parenthetical translations or non-English/non-Japanese characters (e.g., Arabic, Russian, Korean, etc.) in the "title" field.
 
       CRITICAL RULES FOR "challenge" CONTENT:
       - The 'content' field MUST contain exactly three nested objects, one for each level: **beginner, intermediate, and advanced**.
@@ -118,9 +121,12 @@ class TopicGenerationService
       - The functional language points listed in the "Must use:" requirement of the 'content' for a specific level MUST be sourced directly from the 'title' of the 'grammar_points' generated for that exact same level.
 
       CRITICAL RULES FOR "grammar_points":
-        - The 'grammar_points' array MUST contain grammar for both "english" and "japanese" languages.
-        - The array MUST contain a minimum of **one** and a maximum of **two** distinct grammar points for **EACH** of the following levels: **beginner, intermediate, and advanced**. (This means a total minimum of 6 points and a total maximum of 12 points).
-        - The "explanation" for a grammar point MUST be in the native language of the learner.
+      - The 'grammar_points' array MUST contain grammar for both "english" and "japanese" languages.
+      - The array MUST contain a minimum of **one** and a maximum of **three** distinct grammar points for **EACH** of the following levels: **beginner, intermediate, and advanced**. (This means a total minimum of 6 points and a total maximum of 18 points).
+
+      - The "explanation" for a grammar point **MUST** be written in the language **OPPOSITE** to the grammar point's "language" field:
+          - If "language" is **"english"**, the "explanation" MUST be in **Japanese**.
+          - If "language" is **"japanese"**, the "explanation" MUST be in **English**.
       PROMPT
   end
 end
