@@ -15,9 +15,9 @@
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
       <%= f.input :name, required: true, input_html: { autocomplete: "name"} %>
-      <%= f.input :native_language, collection: ['English', 'Japanese'], required: true, prompt: 'Select your native language' %>
-      <%= f.input :learning_language, collection: ['English', 'Japanese'], required: true, prompt: 'Select the language you would like to learn' %>
-      <%= f.input :learning_level, collection: ['Beginner', 'Intermediate', 'Advanced'], required: true, prompt: 'Select your current level in the language you would like to learn' %>
+      <%= f.input :native_language, collection: [['English', 'english'], ['Japanese', 'japanese']], required: true, prompt: 'Select your native language' %>
+      <%= f.input :learning_language, collection: [['English', 'english'], ['Japanese', 'japanese']], required: true, prompt: 'Select the language you would like to learn' %>
+      <%= f.input :learning_level, collection: [['Beginner', 'beginner'], ['Intermediate', 'intermediate'], ['Advanced', 'advanced']], required: true, prompt: 'Select your current level in the language you would like to learn' %>
       <%= f.input :photo, as: :file %>
     </div>
     <div class="form-actions">
