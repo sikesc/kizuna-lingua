@@ -6,7 +6,14 @@
     Create a new topic
   </button>
 </div>
-
+<%# Search Form %>
+<div class="container mt-4">
+  <%= simple_form_for :search, url: topics_path, method: :get, html: { class: "d-flex" } do |f| %>
+    <%= f.input :query, label: false, wrapper: false, input_html: {class: "form-control", placeholder: "Search topics...", value: params[:search].try(:[], :query)} %>
+    <%= f.button :submit, "Search", class: "btn btn-primary ms-2" %>
+  <% end %>
+</div>
+<%# Topics List %>
 <div class="container mt-4">
   <ul class="journal-list" id="topics-list">
       <% @topics.each do |topic| %>

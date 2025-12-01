@@ -1,6 +1,12 @@
 class TopicsController < ApplicationController
   def index
-    @topics = policy_scope(Topic)
+    base_scope = policy_scope(Topic)
+    search_query = params.dig(:search, :query)
+    if search_query.present?
+      @topics = base_scope.where("name ILIKE ?", "%#{search_query}%")
+    else
+      @topics = base_scope.order(created_at: :desc)
+    end
     @partnership = current_user.partnership
     @partnership_topic = PartnershipTopic.new
   end
