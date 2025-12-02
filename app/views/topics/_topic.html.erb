@@ -2,10 +2,10 @@
   <li class="topic-list-item" data-bs-toggle="modal" data-bs-target="#itemModal-<%= topic.id %>">
     <div class="topic-card-header">
       <h3 class="topic-card-title"><%= topic.name %></h3>
-      <% if topic_status == "in progress" %>
-        <span class="topic-status-badge status-started">Started</span>
-      <% elsif topic_status == "completed" %>
-        <span class="topic-status-badge status-completed"><i class="fa-solid fa-check"></i> Completed</span>
+      <% if topic_status == "completed" %>
+        <i class="fa-solid fa-check" style="color: #1EDD88; font-size: 1.25rem;"></i>
+      <% elsif topic_status == "in progress" %>
+        <i class="fa-regular fa-clock" style="color: #c8a640ff; font-size: 1.25rem;"></i>
       <% end %>
     </div>
     <div class="topic-card-footer">
