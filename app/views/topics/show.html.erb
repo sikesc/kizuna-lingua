@@ -7,47 +7,55 @@
       <% elsif current_user.learning_language == "english"%>
         <%= @topic.content["jpn"] %> <br>
       <% end %>
-    </div>
-    <div class="accordion" id="grammarPointsAccordion">
-      <% if @filtered_grammar_points.empty? %>
-        <p>No grammar points are available for your <%= current_user.learning_level %> level yet.</p>
-      <% else %>
-        <% @filtered_grammar_points.each_with_index do |grammar_point, index| %>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="heading<%= grammar_point.level.parameterize %>-<%= index %>">
-              <button class="accordion-button <%= 'collapsed' unless index == 0 %>" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#collapse<%= grammar_point.level.parameterize %>-<%= index %>"
-                  aria-expanded="<%= index == 0 %>" aria-controls="collapse<%= grammar_point.level.parameterize %>-<%= index %>">
-                <%= grammar_point.title %>
-              </button>
-            </h2>
-            <div id="collapse<%= grammar_point.level.parameterize %>-<%= index %>" class="accordion-collapse collapse <%= 'show' if index == 0 %>"
-             aria-labelledby="heading<%= grammar_point.level.parameterize %>-<%= index %>">
-              <div class="accordion-body">
-                <h4>Explanation:</h4>
-                <p><%= grammar_point.explanation %></p>
-                <h4>Examples:</h4>
-                <p><%= grammar_point.examples %></p>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="ms-4 me-4">
-      <hr>
-      <h1>Written Challenge</h1>
-      <% if current_user.learning_language == "japanese" %>
-        <%= @challenge.content["#{@user_level}"]["en"] %>
-      <% elsif current_user.learning_language == "english" %>
-        <%= @challenge.content["#{@user_level}"]["jp"] %>
-      <% end %>
     </p>
   </div>
-  <div class="container mt-4">
-    <%= simple_form_for [@challenge, @journal] do |f| %>
-      <%= f.input :content, as: :text, rows: 10, label: false, placeholder: "Write your answers here..." %>
-      <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+  <div class="accordion" id="grammarPointsAccordion">
+    <% if @filtered_grammar_points.empty? %>
+      <p>No grammar points are available for your <%= current_user.learning_level %> level yet.</p>
+    <% else %>
+      <% @filtered_grammar_points.each_with_index do |grammar_point, index| %>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading<%= grammar_point.level.parameterize %>-<%= index %>">
+            <button class="accordion-button <%= 'collapsed' unless index == 0 %>" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapse<%= grammar_point.level.parameterize %>-<%= index %>"
+                aria-expanded="<%= index == 0 %>" aria-controls="collapse<%= grammar_point.level.parameterize %>-<%= index %>">
+              <%= grammar_point.title %>
+            </button>
+          </h2>
+          <div id="collapse<%= grammar_point.level.parameterize %>-<%= index %>" class="accordion-collapse collapse <%= 'show' if index == 0 %>"
+           aria-labelledby="heading<%= grammar_point.level.parameterize %>-<%= index %>">
+            <div class="accordion-body">
+              <h4>Explanation:</h4>
+              <p><%= grammar_point.explanation %></p>
+              <h4>Examples:</h4>
+              <p><%= grammar_point.examples %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
+  <div class="ms-4 me-4">
+    <hr>
+    <h1>Written Challenge</h1>
+    <% if @challenge && @challenge.content.dig(@user_level) %>
+      <p>
+        <% if current_user.learning_language == "japanese" %>
+          <%= @challenge.content.dig(@user_level, "en") %>
+        <% elsif current_user.learning_language == "english" %>
+          <%= @challenge.content.dig(@user_level, "jp") %>
+        <% end %>
+      </p>
+    <% else %>
+      <p>No challenge available for this topic yet.</p>
+    <% end %>
+  </div>
+  <% if @challenge && @challenge.content.dig(@user_level) %>
+    <div class="container mt-4">
+      <%= simple_form_for [@challenge, @journal] do |f| %>
+        <%= f.input :content, as: :text, rows: 10, label: false, placeholder: "Write your answers here..." %>
+        <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
