@@ -31,7 +31,7 @@
           <%= simple_format(content_to_display) %>
         </div>
         <div class="modal-footer">
-          <%= simple_form_for ([topic, partnership_topic]) do |f| %>
+          <%= simple_form_for ([topic, partnership_topic]), data: { turbo_frame: "_top" } do |f| %>
             <%= f.submit "Select Topic", class: "select-topic-btn" %>
           <% end %>
           <button type="button" class="close-topic-btn" data-bs-dismiss="modal">Close</button>
