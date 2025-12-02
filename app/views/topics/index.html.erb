@@ -1,9 +1,9 @@
 <%= turbo_stream_from "topics" %>
 <div class="topics-index-container">
   <div class="topics-header">
-    <h1>Topic List</h1>
+    <h1>Topics</h1>
     <button type="button" class="create-topic-btn" data-bs-toggle="modal" data-bs-target="#newTopicModal">
-      Create a new topic
+      New topic
     </button>
   </div>
 
@@ -31,15 +31,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newTopicModalLabel">Generate a New Topic with AI</h5>
+        <h5 class="modal-title" id="newTopicModalLabel">Generate a New Topic</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= simple_form_for :topic, url: generate_topics_path, method: :post, 'data-turbo': false do |f| %>
           <%= f.input :name, label: "Suggest a Topic Title:", placeholder: "e.g., 'Planning a Trip', 'Favorite Books'", required: true %>
           <div class="modal-footer">
+            <%= f.button :submit, "Generate Topic", class: "generate-topic-btn", data: { disable_with: "Generating..." } %>
             <button type="button" class="close-topic-btn" data-bs-dismiss="modal">Close</button>
-            <%= f.button :submit, "Generate Topic", class: "create-topic-btn", data: { disable_with: "Generating..." } %>
           </div>
         <% end %>
       </div>

@@ -11,7 +11,7 @@
 
   h1 {
     margin: 0;
-    color: $gray;
+    color: #3D88BA;
   }
 }
 
@@ -119,6 +119,45 @@
 }
 
 .create-topic-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  background: linear-gradient(120deg, #DE5860, #E87A80);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(#DE5860, 0.5);
+    background: linear-gradient(120deg, darken(#DE5860, 5%), darken(#E87A80, 5%));
+    color: #fff;
+  }
+}
+
+.select-topic-btn {
+  background: linear-gradient(120deg, #3D88BA, #5AA0CC);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(#3D88BA, 0.4);
+    background: linear-gradient(120deg, darken(#3D88BA, 5%), darken(#5AA0CC, 5%));
+    color: #fff;
+  }
+}
+
+.generate-topic-btn {
   background: linear-gradient(120deg, #3D88BA, #5AA0CC);
   border: none;
   border-radius: 12px;
