@@ -20,7 +20,22 @@
       @import url('https://fonts.googleapis.com/css2?family=Story+Script&display=swap');
     </style>
   </head>
-  <body>
+  <body data-controller="notification-panel">
+    <% if current_user %>
+      <%# Fullscreen Notification Panel (controlled by Stimulus) %>
+      <div data-notification-panel-target="panel" class="notification-panel-container hidden">
+        <div class="notification-panel-header">
+          <h3>Notifications</h3>
+          <a href="#" data-action="click->notification-panel#toggle" class="close-panel-btn">&times;</a>
+        </div>
+        <div class="notification-panel-body" data-notification-panel-target="notifications">
+          <% @notifications.each do |notification| %>
+            <%= render partial: "notifications/notification", locals: { notification: notification } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
     <%= render "shared/flashes" %>
     <%= yield %>
     <% if current_user %>

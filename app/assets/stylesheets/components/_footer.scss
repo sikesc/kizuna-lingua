@@ -1,13 +1,13 @@
 .icon {
-    flex: 1;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    font-size: 22px;
-    user-select: none;
-    transition: transform 0.2s ease-in-out;
+  position: relative; // Establish positioning context for the badge
+  flex: 1;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+  transition: transform 0.2s ease-in-out;
 }
-
 .icon:hover, .icon:focus {
     outline: none;
     transform: scale(1.1);

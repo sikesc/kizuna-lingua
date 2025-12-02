@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications, only: [:show]
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
   resources :journals, only: [:update] do
     member do
       patch :complete_conversation
+      post :remind_partner # New route for sending reminders
     end
   end
   resources :grammar_points, only: [:show]

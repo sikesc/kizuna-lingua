@@ -82,3 +82,5 @@ gem "ruby_llm"
 gem 'cloudinary', '~> 1.16.0'
 gem "solid_queue"
 gem "solid_cable"
+
+gem "noticed", "~> 2.9"

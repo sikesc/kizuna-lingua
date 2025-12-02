@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :set_notifications
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
   #   redirect_to(root_path)
 
   private
+
+  def set_notifications
+    @notifications = Noticed::Notification.where(recipient: current_user).newest_first if current_user
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/

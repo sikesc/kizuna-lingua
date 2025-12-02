@@ -26,4 +26,12 @@ class JournalPolicy < ApplicationPolicy
   def complete_conversation?
     user.partnership && record.partnership == user.partnership
   end
+
+  def remind_partner?
+    # A user can send a reminder for a journal if:
+    # They are in a partnership.
+    # The journal belongs to their partnership.
+    # The journal was not created by themselves (it belongs to their partner).
+    user.partnership && record.partnership == user.partnership && record.user != user
+  end
 end

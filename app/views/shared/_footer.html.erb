@@ -4,6 +4,17 @@
   <% if current_user.partnership != nil %>
     <div class="icon" id="journal" tabindex="0"><%= link_to partnership_journals_path(current_user.partnership), class: "link" do %><i class="fa-solid fa-book"></i><% end %></div>
   <% end %>
+
+  <%# Notification Bell Icon (Trigger) %>
+  <div class="icon" id="notifications" tabindex="0">
+    <a href="#" class="link" data-action="click->notification-panel#toggle">
+      <i class="fas fa-bell"></i>
+      <% if @notifications.unread.any? %>
+        <span class="notification-badge" data-notification-panel-target="count"><%= @notifications.unread.count %></span>
+      <% end %>
+    </a>
+  </div>
+
   <div class="dropup icon">
     <button class="btn p-0 border-0 link icon" type="button"
             id="settingsDropup"
