@@ -4,6 +4,13 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  turbo-frame {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
 }
 
 .topics-header {
