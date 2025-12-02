@@ -14,7 +14,7 @@ class GenerateTopicJob < ApplicationJob
       Turbo::StreamsChannel.broadcast_prepend_to(
         "topics",
         target: "topics-list",
-        partial: "topics/topic", locals: { partnership_topic: PartnershipTopic.new, topic:topic, content_to_display: content_to_display })
+        partial: "topics/topic", locals: { partnership_topic: PartnershipTopic.new, topic:topic, content_to_display: content_to_display, topic_status: "in progress" })
     end
   end
 end

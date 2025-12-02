@@ -21,9 +21,17 @@
   <% if @most_recent_topic %>
     <div class="topic-background-box mb-3">
       <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do %>
-        <div class="topic-card">
-          <div class="topic-name"><%= @most_recent_topic.name %></div>
-        </div>
+        <% if @most_recent_topic.image.attached? %>
+          <% image_url = url_for(@most_recent_topic.image) %>
+          <div class="topic-card" style="background-image: url('<%= image_url %>');">
+            <div class="topic-name"><%= @most_recent_topic.name %></div>
+          </div>
+        <% else %>
+          <% stock_image_url = "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
+          <div class="topic-card" style="background-image: url('<%= stock_image_url %>');" >
+            <div class="topic-name"><%= @most_recent_topic.name %></div>
+          </div>
+        <% end %>
       <% end %>
       <% if @progress_percentage >= 100 %>
         <div class="mt-3">

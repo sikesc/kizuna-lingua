@@ -22,6 +22,7 @@ class TopicGenerationService
         return { success: false, error: "AI returned an empty response." } unless llm_response&.content
 
         parsed_data = JSON.parse(llm_response.content)
+        @generated_image = generate_image
     persist_data(parsed_data)
 
   rescue JSON::ParserError => e
@@ -42,6 +43,13 @@ class TopicGenerationService
         name: @topic_title,
         content: data["topic_content"]
       )
+      if @generated_image
+        new_topic.image.attach(
+        io: @generated_image,
+        filename: "#{@topic_title.parameterize}.png",
+        content_type: "image/png"
+        )
+      end
       new_topic.challenges.create!(
         content: challenge_data["content"],
         conversation: challenge_data["conversation"]
@@ -66,6 +74,13 @@ class TopicGenerationService
       end
     end
     { success: true, topic: new_topic }
+  end
+
+  def generate_image
+     prompt = "A simple, clean illustration representing the concept of '#{@topic_title}' for language learning. Minimalist style, suitable as a topic header image. Do not include any words or letters."
+     image_chat = RubyLLM.chat(model: "gemini-2.5-flash-image")
+     reply = image_chat.ask(prompt)
+     reply.content[:attachments][0].source
   end
 
   def create_user_prompt(user_one_profile, user_two_profile)
