@@ -23,7 +23,16 @@ consumer.subscriptions.create("NotificationChannel", {
       }
     }
 
-    // Reload the page to show the new notification
-    window.location.reload()
+    // Refresh the notifications list
+    const notificationsList = document.getElementById("notifications-list")
+    if (notificationsList) {
+      fetch("/notifications", {
+        headers: { "Accept": "text/html" }
+      })
+        .then(response => response.text())
+        .then(html => {
+          notificationsList.innerHTML = html
+        })
+    }
   }
 })
