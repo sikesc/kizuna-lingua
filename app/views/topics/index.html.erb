@@ -1,27 +1,84 @@
 <%= turbo_stream_from "topics" %>
-<div class="topics-index-container">
-  <div class="topics-header">
-    <h2>Explore topics</h2>
-    <button type="button" class="create-topic-btn" data-bs-toggle="modal" data-bs-target="#newTopicModal">
-      New topic
-    </button>
-  </div>
 
-  <div class="topics-search-container" id="search-container">
-    <%= simple_form_for :search, url: topics_path, method: :get, html: { class: "d-flex", data: { controller: "search-form", turbo_frame: "topics_list" } } do |f| %>
-      <%= f.input :query, label: false, wrapper: false, input_html: {class: "form-control", placeholder: "Search topics...", value: params[:search].try(:[], :query), data: { action: "input->search-form#submit" }} %>
+<div class="topics-index">
+  <!-- Header Section -->
+  <header class="topics-index__header">
+    <div class="topics-index__header-content">
+      <%= link_to dashboard_path, class: "topics-index__back" do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
+      <div class="topics-index__title-group">
+        <h1 class="topics-index__title">Explore Topics</h1>
+        <p class="topics-index__subtitle">Choose a topic to learn with your partner</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="topics-index__main">
+    <!-- Search Bar -->
+    <div class="topics-search">
+      <%= simple_form_for :search, url: topics_path, method: :get, html: { class: "topics-search__form", data: { controller: "search-form", turbo_frame: "topics_list" } } do |f| %>
+        <i class="fas fa-search topics-search__icon"></i>
+        <%= f.input :query, label: false, wrapper: false, input_html: { class: "topics-search__input", placeholder: "Search topics...", value: params[:search].try(:[], :query), data: { action: "input->search-form#submit" } } %>
+      <% end %>
+    </div>
+
+    <%= turbo_frame_tag "topics_list" do %>
+      <!-- Filter Tabs -->
+      <div class="topics-filter">
+        <%= link_to topics_path(status: nil, search: { query: params.dig(:search, :query) }), class: "topics-filter__btn #{'topics-filter__btn--active' if params[:status].blank?}" do %>
+          All
+        <% end %>
+        <%= link_to topics_path(status: "not_started", search: { query: params.dig(:search, :query) }), class: "topics-filter__btn #{'topics-filter__btn--active' if params[:status] == 'not_started'}" do %>
+          New
+        <% end %>
+        <%= link_to topics_path(status: "in_progress", search: { query: params.dig(:search, :query) }), class: "topics-filter__btn #{'topics-filter__btn--active' if params[:status] == 'in_progress'}" do %>
+          In Progress
+        <% end %>
+        <%= link_to topics_path(status: "completed", search: { query: params.dig(:search, :query) }), class: "topics-filter__btn #{'topics-filter__btn--active' if params[:status] == 'completed'}" do %>
+          Completed
+        <% end %>
+      </div>
+
+      <!-- Topics Grid -->
+      <div class="topics-grid" id="topics-list">
+        <% @topics.each do |topic| %>
+          <% topic_status = @topic_statuses[topic.id]&.status || "not started" %>
+
+          <div id="<%= dom_id(topic) %>" class="topic-card" data-bs-toggle="modal" data-bs-target="#itemModal-<%= topic.id %>" style="display: flex; flex-direction: column; border-radius: 0.75rem; overflow: hidden; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer;">
+            <div style="position: relative; height: 80px; min-height: 80px; flex-shrink: 0; overflow: hidden;">
+              <% if topic.image.attached? %>
+                <%= image_tag url_for(topic.image), alt: topic.name, style: "width: 100%; height: 100%; object-fit: cover;" %>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(30,41,59,0.5) 0%, rgba(30,41,59,0.1) 50%, rgba(30,41,59,0.15) 100%);"></div>
+              <% else %>
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #FF6B6B 0%, #FFB347 100%);">
+                  <i class="fas fa-book-reader" style="font-size: 1.5rem; color: white; opacity: 0.8;"></i>
+                </div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(30,41,59,0.5) 0%, rgba(30,41,59,0.1) 50%, rgba(30,41,59,0.15) 100%);"></div>
+              <% end %>
+              <% if topic_status == "completed" || topic_status == "in progress" %>
+                <div style="position: absolute; top: 0.5rem; right: 0.5rem;">
+                  <% if topic_status == "completed" %>
+                    <span style="display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #20B2AA; color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                      <i class="fas fa-check" style="font-size: 0.5rem;"></i>
+                    </span>
+                  <% elsif topic_status == "in progress" %>
+                    <span style="display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #FFB347; color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                      <i class="fas fa-play" style="font-size: 0.5rem;"></i>
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div style="padding: 0.5rem; background: white;">
+              <h3 style="font-size: 0.75rem; font-weight: 600; color: #1e293b; margin: 0; line-height: 1.3;"><%= topic.name %></h3>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </div>
 
-  <%= turbo_frame_tag "topics_list" do %>
-  <div class="topics-filter-container">
-    <%= link_to "All", topics_path(status: nil, search: { query: params.dig(:search, :query) }), class: "filter-btn #{'active' if params[:status].blank?}" %>
-    <%= link_to "Not Started", topics_path(status: "not_started", search: { query: params.dig(:search, :query) }), class: "filter-btn #{'active' if params[:status] == 'not_started'}" %>
-    <%= link_to "In Progress", topics_path(status: "in_progress", search: { query: params.dig(:search, :query) }), class: "filter-btn #{'active' if params[:status] == 'in_progress'}" %>
-    <%= link_to "Completed", topics_path(status: "completed", search: { query: params.dig(:search, :query) }), class: "filter-btn #{'active' if params[:status] == 'completed'}" %>
-  </div>
-
-  <ul class="topics-list" id="topics-list">
+    <!-- Topic Modals (rendered outside of grid) -->
     <% @topics.each do |topic| %>
       <% content_to_display = if current_user.learning_language == "japanese"
                                 topic.content["eng"]
@@ -31,13 +88,17 @@
       <% topic_status = @topic_statuses[topic.id]&.status || "not started" %>
       <%= render "topics/topic", topic: topic, content_to_display: content_to_display, partnership_topic: @partnership_topic, topic_status: topic_status %>
     <% end %>
-  </ul>
-  <% end %>
+  </main>
+
+  <!-- Floating Action Button -->
+  <button type="button" class="topics-fab" data-bs-toggle="modal" data-bs-target="#newTopicModal">
+    <i class="fas fa-plus"></i>
+  </button>
 </div>
 
-<%# New Topic Modal %>
-<div class="modal fade topic-modal" id="newTopicModal" tabindex="-1" aria-labelledby="newTopicModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- New Topic Modal -->
+<div class="modal fade topics-modal" id="newTopicModal" tabindex="-1" aria-labelledby="newTopicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="newTopicModalLabel">Generate a New Topic</h5>
@@ -45,10 +106,13 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for :topic, url: generate_topics_path, method: :post, 'data-turbo': false do |f| %>
-          <%= f.input :name, label: "Suggest a Topic Title:", placeholder: "e.g., 'Planning a Trip', 'Favorite Books'", required: true %>
-          <div class="modal-footer">
-            <%= f.button :submit, "Generate Topic", class: "generate-topic-btn", data: { disable_with: "Generating..." } %>
-            <button type="button" class="close-topic-btn" data-bs-dismiss="modal">Close</button>
+          <%= f.input :name, label: "Suggest a Topic Title:", placeholder: "e.g., 'Planning a Trip', 'Favorite Books'", required: true, input_html: { class: "topics-modal__input" } %>
+          <div class="topics-modal__actions">
+            <%= f.button :submit, class: "topics-modal__btn topics-modal__btn--primary", data: { disable_with: "Generating..." } do %>
+              <i class="fas fa-magic"></i>
+              Generate Topic
+            <% end %>
+            <button type="button" class="topics-modal__btn topics-modal__btn--secondary" data-bs-dismiss="modal">Cancel</button>
           </div>
         <% end %>
       </div>
