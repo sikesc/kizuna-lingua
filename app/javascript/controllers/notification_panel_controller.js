@@ -1,14 +1,32 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="notification-panel"
 export default class extends Controller {
-  static targets = ["panel", "overlay", "count", "notifications"]
+  static targets = ["panel", "overlay", "notifications"]
+
+  connect() {
+    this.isOpen = false
+  }
 
   toggle(event) {
     event.preventDefault()
     event.stopPropagation()
-    this.panelTarget.classList.toggle('active')
-    this.overlayTarget.classList.toggle('active')
-    document.body.classList.toggle('no-scroll')
+
+    if (!this.hasPanelTarget || !this.hasOverlayTarget) {
+      return
+    }
+
+    this.isOpen = !this.isOpen
+
+    if (this.isOpen) {
+      this.panelTarget.style.right = "0"
+      this.overlayTarget.style.opacity = "1"
+      this.overlayTarget.style.visibility = "visible"
+      document.body.classList.add("no-scroll")
+    } else {
+      this.panelTarget.style.right = "-100%"
+      this.overlayTarget.style.opacity = "0"
+      this.overlayTarget.style.visibility = "hidden"
+      document.body.classList.remove("no-scroll")
+    }
   }
 }

@@ -1,31 +1,42 @@
 <%# app/views/notifications/_notification.html.erb %>
 <%# This is the generic partial for rendering any notification type. %>
-<%# The 'notification' object is passed as a local variable. %>
 
-<div class="notification-item <%= 'unread' unless notification.read? %>">
-  <%= link_to notification_path(notification), class: "notification-link" do %>
+<% is_unread = !notification.read? %>
+<% border_style = is_unread ? "border-left: 3px solid #FF6B6B;" : "" %>
+<% opacity_style = is_unread ? "opacity: 1;" : "opacity: 0.6;" %>
+
+<div style="background: white; border-radius: 0.75rem; margin-bottom: 0.75rem; box-shadow: 0 2px 8px rgba(30,41,59,0.06); overflow: hidden; <%= border_style %> <%= opacity_style %> transition: transform 0.2s ease, box-shadow 0.2s ease;">
+  <%= link_to notification_path(notification), style: "display: block; padding: 1rem; text-decoration: none; color: inherit; position: relative;" do %>
+    <% if is_unread %>
+      <div style="position: absolute; top: 1rem; right: 1rem; width: 8px; height: 8px; background: #FF6B6B; border-radius: 50%;"></div>
+    <% end %>
+
     <% case notification.event.type %>
     <% when "JournalSubmittedNotification" %>
-      <p>
-        <strong><%= notification.params[:journal].user.name %></strong> has submitted a new journal for the topic
-        "<strong><%= notification.params[:journal].challenge.topic.name %></strong>".
+      <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; line-height: 1.5; color: #475569; padding-right: 1rem;">
+        <strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].user.name %></strong> has submitted a new journal for the topic
+        "<strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].challenge.topic.name %></strong>".
       </p>
     <% when "JournalFeedbackNotification" %>
-      <p>
-        Your partner <strong><%= notification.params[:journal].user.partner.name %></strong> has provided feedback on your journal for the topic
-        "<strong><%= notification.params[:journal].challenge.topic.name %></strong>".
+      <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; line-height: 1.5; color: #475569; padding-right: 1rem;">
+        Your partner <strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].user.partner.name %></strong> has provided feedback on your journal for the topic
+        "<strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].challenge.topic.name %></strong>".
       </p>
     <% when "JournalReminderNotification" %>
-      <p>
-        Your partner <strong><%= notification.params[:journal].user.partner.name %></strong>
+      <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; line-height: 1.5; color: #475569; padding-right: 1rem;">
+        Your partner <strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].user.partner.name %></strong>
         is reminding you to complete your journal for the topic
-        "<strong><%= notification.params[:journal].challenge.topic.name %></strong>".
+        "<strong style="color: #1E293B; font-weight: 600;"><%= notification.params[:journal].challenge.topic.name %></strong>".
       </p>
     <% else %>
-      <p>
+      <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; line-height: 1.5; color: #475569; padding-right: 1rem;">
         You have a new notification: <%= notification.event.type %>
       </p>
     <% end %>
-    <small class="text-muted"><%= time_ago_in_words(notification.created_at) %> ago</small>
+
+    <small style="display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; color: #94A3B8;">
+      <i class="far fa-clock" style="font-size: 0.625rem;"></i>
+      <%= time_ago_in_words(notification.created_at) %> ago
+    </small>
   <% end %>
 </div>
