@@ -1,47 +1,58 @@
-<div id="<%= dom_id(topic) %>">
-  <li class="topic-card" data-bs-toggle="modal" data-bs-target="#itemModal-<%= topic.id %>">
-    <div class="topic-card__content">
-      <h3 class="topic-card__title"><%= topic.name %></h3>
-      <div class="topic-card__meta">
-        <span class="topic-card__status">
-          <% if topic_status == "completed" %>
-            <i class="fas fa-check-circle"></i>
-            Completed
-          <% elsif topic_status == "in progress" %>
-            <i class="fas fa-clock"></i>
-            In Progress
-          <% else %>
-            <i class="fas fa-circle"></i>
-            Not Started
-          <% end %>
-        </span>
-      </div>
-    </div>
-    <div class="topic-card__action">
-      <i class="fas fa-chevron-right"></i>
-    </div>
-  </li>
-
-  <!-- Topic Detail Modal -->
+<!-- Topic Detail Modal -->
   <div class="modal fade topics-modal" id="itemModal-<%= topic.id %>" tabindex="-1" aria-labelledby="itemModalLabel-<%= topic.id %>" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="itemModalLabel-<%= topic.id %>"><%= topic.name %></h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Modal Header with Image -->
+        <div class="topics-modal__hero">
+          <% if topic.image.attached? %>
+            <%= image_tag url_for(topic.image), class: "topics-modal__hero-image", alt: topic.name %>
+          <% else %>
+            <div class="topics-modal__hero-placeholder">
+              <i class="fas fa-book-reader"></i>
+            </div>
+          <% end %>
+          <div class="topics-modal__hero-overlay">
+            <button type="button" class="topics-modal__close" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fas fa-times"></i>
+            </button>
+            <div class="topics-modal__hero-content">
+              <% if topic_status == "completed" %>
+                <span class="topics-modal__status topics-modal__status--completed">
+                  <i class="fas fa-check-circle"></i> Completed
+                </span>
+              <% elsif topic_status == "in progress" %>
+                <span class="topics-modal__status topics-modal__status--progress">
+                  <i class="fas fa-clock"></i> In Progress
+                </span>
+              <% else %>
+                <span class="topics-modal__status topics-modal__status--new">
+                  <i class="fas fa-sparkles"></i> New
+                </span>
+              <% end %>
+              <h3 class="topics-modal__title"><%= topic.name %></h3>
+            </div>
+          </div>
         </div>
+
         <div class="modal-body">
           <div class="topics-modal__description">
             <%= simple_format(content_to_display) %>
           </div>
         </div>
-        <div class="topics-modal__actions">
+        <div class="topics-modal__actions" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 0 1.5rem 1.5rem;">
           <%= simple_form_for ([topic, partnership_topic]), data: { turbo_frame: "_top" } do |f| %>
-            <%= f.submit "Select Topic", class: "topics-modal__btn topics-modal__btn--primary" %>
+            <%= f.button :submit, class: "topics-modal__btn topics-modal__btn--primary" do %>
+              <% if topic_status == "completed" %>
+                <i class="fas fa-redo"></i> Review Again
+              <% elsif topic_status == "in progress" %>
+                <i class="fas fa-arrow-right"></i> Continue
+              <% else %>
+                <i class="fas fa-rocket"></i> Start Learning
+              <% end %>
+            <% end %>
           <% end %>
           <button type="button" class="topics-modal__btn topics-modal__btn--secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
   </div>
-</div>
