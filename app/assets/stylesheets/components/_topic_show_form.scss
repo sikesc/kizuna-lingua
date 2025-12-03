@@ -1,41 +1,65 @@
-.form-control {
-    border-radius: 10px;
-    background: linear-gradient(120deg, #1a1423, #271e35);
-    border: 1px solid #553745;
-    color: white;
-    font-size: 1.1rem;
-    padding: 15px;
+// Topic Show Form Styles
+// Themed form controls for the topic show page
 
-    &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
+.challenge-textarea {
+  border-radius: 0.75rem;
+  background: white;
+  border: 2px solid $slate-200;
+  color: $slate-800;
+  font-size: 1rem;
+  padding: 1rem;
+  min-height: 150px;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
 
-    &:focus {
-        background: linear-gradient(120deg, #1a1423, #271e35);
-        border-color: #774C60;
-        color: white;
-        box-shadow: 0 0 0 2px rgba(119, 76, 96, 0.3);
-    }
+  &::placeholder {
+    color: $slate-400;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $coral;
+    box-shadow: 0 0 0 3px rgba($coral, 0.15);
+  }
+
+  @media (min-width: 576px) {
+    min-height: 180px;
+    padding: 1.25rem;
+  }
 }
 
-textarea.form-control {
-    min-height: 200px !important;
-    height: auto !important;
-    resize: vertical;
-}
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  background: $gradient-coral;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
 
-.btn-primary {
-    border-radius: 8px;
-    background: linear-gradient(135deg,#372549,#774C60);
-    box-shadow: 0 2px 4px #160f1d,0 5px 10px #1d1317;
-    transition: transform 0.1s ease;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    margin-top: 10px;
-}
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($coral, 0.3);
+  }
 
-.btn-primary:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg,#553745,#774C60);
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 576px) {
+    width: auto;
+    padding: 0.75rem 2rem;
+  }
 }

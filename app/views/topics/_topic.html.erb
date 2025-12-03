@@ -1,40 +1,45 @@
 <div id="<%= dom_id(topic) %>">
-  <li class="topic-list-item" data-bs-toggle="modal" data-bs-target="#itemModal-<%= topic.id %>">
-    <div class="topic-card-header">
-      <h3 class="topic-card-title"><%= topic.name %></h3>
-      <% if topic_status == "completed" %>
-        <i class="fa-solid fa-check" style="color: #1EDD88; font-size: 1.25rem;"></i>
-      <% elsif topic_status == "in progress" %>
-        <i class="fa-regular fa-clock" style="color: #c8a640ff; font-size: 1.25rem;"></i>
-      <% end %>
+  <li class="topic-card" data-bs-toggle="modal" data-bs-target="#itemModal-<%= topic.id %>">
+    <div class="topic-card__content">
+      <h3 class="topic-card__title"><%= topic.name %></h3>
+      <div class="topic-card__meta">
+        <span class="topic-card__status">
+          <% if topic_status == "completed" %>
+            <i class="fas fa-check-circle"></i>
+            Completed
+          <% elsif topic_status == "in progress" %>
+            <i class="fas fa-clock"></i>
+            In Progress
+          <% else %>
+            <i class="fas fa-circle"></i>
+            Not Started
+          <% end %>
+        </span>
+      </div>
     </div>
-    <div class="topic-card-footer">
-      <span class="topic-card-status">Status: <%= topic_status.titleize %></span>
-      <% if topic_status == "completed" %>
-        <span class="topic-card-btn">Review Topic</span>
-      <% elsif topic_status == "in progress" %>
-        <span class="topic-card-btn">Continue</span>
-      <% else %>
-        <span class="topic-card-btn">Start Topic</span>
-      <% end %>
+    <div class="topic-card__action">
+      <i class="fas fa-chevron-right"></i>
     </div>
   </li>
 
-  <div class="modal fade topic-modal" id="itemModal-<%= topic.id %>" tabindex="-1" aria-labelledby="itemModalLabel-<%= topic.id %>" aria-hidden="true">
-    <div class="modal-dialog">
+  <!-- Topic Detail Modal -->
+  <div class="modal fade topics-modal" id="itemModal-<%= topic.id %>" tabindex="-1" aria-labelledby="itemModalLabel-<%= topic.id %>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title" id="itemModalLabel-<%= topic.id %>"><%= topic.name %></h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= simple_format(content_to_display) %>
+          <div class="topics-modal__description">
+            <%= simple_format(content_to_display) %>
+          </div>
         </div>
-        <div class="modal-footer">
+        <div class="topics-modal__actions">
           <%= simple_form_for ([topic, partnership_topic]), data: { turbo_frame: "_top" } do |f| %>
-            <%= f.submit "Select Topic", class: "select-topic-btn" %>
+            <%= f.submit "Select Topic", class: "topics-modal__btn topics-modal__btn--primary" %>
           <% end %>
-          <button type="button" class="close-topic-btn" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="topics-modal__btn topics-modal__btn--secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>
