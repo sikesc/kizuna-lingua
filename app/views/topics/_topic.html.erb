@@ -41,15 +41,15 @@
         </div>
         <div class="topics-modal__actions" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 0 1.5rem 1.5rem;">
           <%= simple_form_for ([topic, partnership_topic]), data: { turbo_frame: "_top" } do |f| %>
-            <%= f.button :submit, class: "topics-modal__btn topics-modal__btn--primary" do %>
+            <button type="submit" class="topics-modal__btn topics-modal__btn--primary">
               <% if topic_status == "completed" %>
-                <i class="fas fa-redo"></i> Review Again
+                <i class="fas fa-redo"></i> Review Topic
               <% elsif topic_status == "in progress" %>
                 <i class="fas fa-arrow-right"></i> Continue
               <% else %>
-                <i class="fas fa-rocket"></i> Start Learning
+                <i class="fas fa-rocket"></i> Start Topic
               <% end %>
-            <% end %>
+            </button>
           <% end %>
           <button type="button" class="topics-modal__btn topics-modal__btn--secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
