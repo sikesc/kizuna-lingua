@@ -1,328 +1,347 @@
-<header class="top-bar">
-  <div class="top-bar__content">
-    <div class="top-bar__title">Welcome <%= current_user.name %></div>
-    <div class="top-bar__avatar">
-      <% if current_user.photo.attached? %>
-        <%= cl_image_tag current_user.photo.key, alt: "Avatar image" %>
-      <% else %>
-        <%= image_tag "user.png", alt: "text" %>
-      <% end %>
+<div class="dashboard">
+  <!-- Header Section -->
+  <header class="dashboard-header">
+    <div class="dashboard-header__greeting">
+      <div class="dashboard-header__welcome">
+        <h1>Welcome back, <%= current_user.name.split.first %></h1>
+        <p>Continue your language journey</p>
+      </div>
+      <div class="dashboard-header__avatars">
+        <div class="partnership-link">
+          <% if current_user.photo.attached? %>
+            <%= cl_image_tag current_user.photo.key, class: "avatar avatar--user", alt: "Your avatar" %>
+          <% else %>
+            <%= image_tag "user.png", class: "avatar avatar--user", alt: "Your avatar" %>
+          <% end %>
+          <% if @partner.photo.attached? %>
+            <%= cl_image_tag @partner.photo.key, class: "avatar avatar--partner", alt: "#{@partner.name}'s avatar" %>
+          <% else %>
+            <%= image_tag "user.png", class: "avatar avatar--partner", alt: "Partner avatar" %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="top-bar-partner-avatar">
-      <% if @partner.photo.attached? %>
-        <%= cl_image_tag @partner.photo.key, alt: "Partner Avatar image" %>
-      <% else %>
-        <%= image_tag "user.png", alt: "text" %>
-      <% end %>
-    </div>
-  </div>
-</header>
-<div class="container content-area-pushed-down">
-  <% if @most_recent_topic %>
-    <div class="topic-background-box mb-3">
-      <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do %>
-        <% if @most_recent_topic.image.attached? %>
-          <% image_url = url_for(@most_recent_topic.image) %>
-          <div class="topic-card" style="background-image: url('<%= image_url %>');">
-            <div class="topic-name"><%= @most_recent_topic.name %></div>
-          </div>
-        <% else %>
-          <% stock_image_url = "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %>
-          <div class="topic-card" style="background-image: url('<%= stock_image_url %>');" >
-            <div class="topic-name"><%= @most_recent_topic.name %></div>
+  </header>
+
+  <main class="dashboard__main">
+    <% if @most_recent_topic %>
+      <!-- Topic Progress Card -->
+      <section class="dashboard-section">
+        <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do %>
+          <div class="topic-progress-card">
+            <div class="topic-progress-card__hero">
+              <% if @most_recent_topic.image.attached? %>
+                <%= image_tag url_for(@most_recent_topic.image), class: "topic-progress-card__image", alt: @most_recent_topic.name %>
+              <% else %>
+                <%= image_tag "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1176&auto=format&fit=crop", class: "topic-progress-card__image", alt: @most_recent_topic.name %>
+              <% end %>
+              <div class="topic-progress-card__overlay">
+                <div class="topic-progress-card__info">
+                  <span class="topic-progress-card__label">Current Topic</span>
+                  <h2 class="topic-progress-card__name"><%= @most_recent_topic.name %></h2>
+                </div>
+                <div class="topic-progress-card__ring">
+                  <% circumference = 2 * Math::PI * 25 %>
+                  <% offset = circumference - (@progress_percentage / 100.0) * circumference %>
+                  <div class="circular-progress">
+                    <svg viewBox="0 0 60 60">
+                      <circle class="circular-progress__bg" cx="30" cy="30" r="25"/>
+                      <circle class="circular-progress__fill" cx="30" cy="30" r="25"
+                        stroke-dasharray="<%= circumference %>"
+                        stroke-dashoffset="<%= offset %>"/>
+                    </svg>
+                    <span class="circular-progress__text"><%= @progress_percentage.round %>%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="topic-progress-card__body">
+              <div class="topic-progress-card__progress">
+                <div class="progress-text">
+                  <span class="progress-text__label">Topic Progress</span>
+                  <span class="progress-text__value"><%= @progress_percentage.round %>% Complete</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: <%= @progress_percentage %>%"
+                    aria-valuenow="<%= @progress_percentage.round %>" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
-      <% end %>
-      <% if @progress_percentage >= 100 %>
-        <div class="mt-3">
+
+        <% if @progress_percentage >= 100 %>
           <%= button_to 'Mark Topic as Complete!',
             complete_topic_partnership_topic_path(@most_recent),
             method: :patch,
             data: { confirm: 'Are you sure you want to finish this topic?' },
-            class: 'btn btn-lg btn-success w-100' %>
+            class: 'topic-complete-btn' %>
+        <% end %>
+      </section>
+
+      <!-- Progress Section -->
+      <section class="dashboard-section">
+        <div class="dashboard-section__header">
+          <h3 class="dashboard-section__title">Your Progress</h3>
+        </div>
+
+        <div class="progress-grid">
+          <!-- Your Tasks Column -->
+          <div class="progress-column">
+            <div class="progress-column__header">
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, class: "progress-column__avatar", alt: "You" %>
+              <% else %>
+                <%= image_tag "user.png", class: "progress-column__avatar", alt: "You" %>
+              <% end %>
+              <div>
+                <h4 class="progress-column__title">Your Tasks</h4>
+                <p class="progress-column__subtitle">Complete these to progress</p>
+              </div>
+            </div>
+
+            <div class="task-list">
+              <!-- Journal Entry -->
+              <% if @my_journal %>
+                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "task-item task-item--clickable" do %>
+                  <div class="task-item__icon task-item__icon--journal">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Journal Entry</p>
+                    <p class="task-item__subtitle">Your writing practice</p>
+                  </div>
+                  <div class="task-item__status task-item__status--complete">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= link_to topic_path(@most_recent_topic), class: "task-item task-item--clickable" do %>
+                  <div class="task-item__icon task-item__icon--journal">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Journal Entry</p>
+                    <p class="task-item__subtitle">Write your entry</p>
+                  </div>
+                  <div class="task-item__status task-item__status--incomplete">
+                    <i class="fas fa-circle"></i>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <!-- Partner Guidance (Feedback to partner) -->
+              <% if @partner_journal %>
+                <% if @partner_journal.feedback %>
+                  <%= link_to partnership_journal_path(@partnership, @partner_journal), class: "task-item task-item--clickable" do %>
+                    <div class="task-item__icon task-item__icon--feedback">
+                      <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="task-item__content">
+                      <p class="task-item__title">Partner Guidance</p>
+                      <p class="task-item__subtitle">Feedback provided</p>
+                    </div>
+                    <div class="task-item__status task-item__status--complete">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= link_to partnership_journal_path(@partnership, @partner_journal), class: "task-item task-item--clickable" do %>
+                    <div class="task-item__icon task-item__icon--feedback">
+                      <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="task-item__content">
+                      <p class="task-item__title">Partner Guidance</p>
+                      <p class="task-item__subtitle">Help your partner improve</p>
+                    </div>
+                    <div class="task-item__status task-item__status--incomplete">
+                      <i class="fas fa-circle"></i>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <div class="task-item task-item--disabled">
+                  <div class="task-item__icon task-item__icon--feedback">
+                    <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Partner Guidance</p>
+                    <p class="task-item__subtitle">Waiting for partner's journal</p>
+                  </div>
+                  <div class="task-item__status task-item__status--locked">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                </div>
+              <% end %>
+
+              <!-- Conversation -->
+              <% if @my_journal && @partner_journal %>
+                <% if @my_journal.conversation_status %>
+                  <div class="task-item">
+                    <div class="task-item__icon task-item__icon--conversation">
+                      <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="task-item__content">
+                      <p class="task-item__title">Conversation</p>
+                      <p class="task-item__subtitle">Practice complete</p>
+                    </div>
+                    <div class="task-item__status task-item__status--complete">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                  </div>
+                <% else %>
+                  <%= link_to challenge_path(@challenge), class: "task-item task-item--clickable" do %>
+                    <div class="task-item__icon task-item__icon--conversation">
+                      <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="task-item__content">
+                      <p class="task-item__title">Conversation</p>
+                      <p class="task-item__subtitle">Practice speaking</p>
+                    </div>
+                    <div class="task-item__status task-item__status--incomplete">
+                      <i class="fas fa-circle"></i>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <div class="task-item task-item--disabled">
+                  <div class="task-item__icon task-item__icon--conversation">
+                    <i class="fas fa-microphone"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Conversation</p>
+                    <p class="task-item__subtitle">Complete journals first</p>
+                  </div>
+                  <div class="task-item__status task-item__status--locked">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Partner's Tasks Column -->
+          <div class="progress-column">
+            <div class="progress-column__header">
+              <% if @partner.photo.attached? %>
+                <%= cl_image_tag @partner.photo.key, class: "progress-column__avatar", alt: @partner.name %>
+              <% else %>
+                <%= image_tag "user.png", class: "progress-column__avatar", alt: @partner.name %>
+              <% end %>
+              <div>
+                <h4 class="progress-column__title"><%= @partner.name.split.first %>'s Tasks</h4>
+                <p class="progress-column__subtitle">Partner progress</p>
+              </div>
+            </div>
+
+            <div class="task-list">
+              <!-- Partner's Journal -->
+              <div class="task-item">
+                <div class="task-item__icon task-item__icon--journal">
+                  <i class="fas fa-book"></i>
+                </div>
+                <div class="task-item__content">
+                  <p class="task-item__title">Journal Entry</p>
+                  <p class="task-item__subtitle"><%= @partner_journal ? "Entry submitted" : "Not yet written" %></p>
+                </div>
+                <div class="task-item__status <%= @partner_journal ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
+                  <i class="fas <%= @partner_journal ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                </div>
+              </div>
+
+              <!-- Feedback from Partner -->
+              <% if @my_journal %>
+                <div class="task-item">
+                  <div class="task-item__icon task-item__icon--feedback">
+                    <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Your Feedback</p>
+                    <p class="task-item__subtitle"><%= @my_journal.feedback ? "Feedback received" : "Awaiting feedback" %></p>
+                  </div>
+                  <div class="task-item__status <%= @my_journal.feedback ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
+                    <i class="fas <%= @my_journal.feedback ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                  </div>
+                </div>
+              <% else %>
+                <div class="task-item task-item--disabled">
+                  <div class="task-item__icon task-item__icon--feedback">
+                    <i class="fas fa-comments"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Your Feedback</p>
+                    <p class="task-item__subtitle">Write journal first</p>
+                  </div>
+                  <div class="task-item__status task-item__status--locked">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                </div>
+              <% end %>
+
+              <!-- Partner's Conversation Status -->
+              <% if @my_journal && @partner_journal %>
+                <div class="task-item">
+                  <div class="task-item__icon task-item__icon--conversation">
+                    <i class="fas fa-microphone"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Conversation</p>
+                    <p class="task-item__subtitle"><%= @my_journal.conversation_status ? "Completed together" : "Ready to practice" %></p>
+                  </div>
+                  <div class="task-item__status <%= @my_journal.conversation_status ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
+                    <i class="fas <%= @my_journal.conversation_status ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                  </div>
+                </div>
+              <% else %>
+                <div class="task-item task-item--disabled">
+                  <div class="task-item__icon task-item__icon--conversation">
+                    <i class="fas fa-microphone"></i>
+                  </div>
+                  <div class="task-item__content">
+                    <p class="task-item__title">Conversation</p>
+                    <p class="task-item__subtitle">Complete journals first</p>
+                  </div>
+                  <div class="task-item__status task-item__status--locked">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Change Topic CTA -->
+      <%= link_to topics_path, class: "cta-card" do %>
+        <div class="cta-card__icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="cta-card__content">
+          <h4 class="cta-card__title">Change Topic</h4>
+          <p class="cta-card__subtitle">Explore other topics to learn</p>
+        </div>
+        <div class="cta-card__arrow">
+          <i class="fas fa-chevron-right"></i>
         </div>
       <% end %>
-    </div>
-    <div class="progress mb-3 rounded-pill" style="height: 25px;">
-      <div class="progress-bar rounded-pill bg-success"
-         role="progressbar"
-         style="width: <%= @progress_percentage %>%"
-         aria-valuenow="<%= @progress_percentage.round %>"
-         aria-valuemin="0"
-         aria-valuemax="100">
-        <%= @progress_percentage.round %>% Complete
-      </div>
-    </div>
-    <% if @my_journal && !@partner_journal %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_locked" %>
-              <%= render "feedback_locked" %>
-              <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do  %>
-                <%= render "journal_complete" %>
-              <% end %>
-            </div>
+
+    <% else %>
+      <!-- Welcome State (No Topic Selected) -->
+      <section class="dashboard-section">
+        <div class="welcome-card">
+          <div class="welcome-card__logo">
+            <i class="fas fa-language"></i>
           </div>
+          <h2 class="welcome-card__title">Welcome to Kizuna Lingua</h2>
+          <p class="welcome-card__text">Start your language learning journey by choosing a topic to explore with your partner.</p>
+          <%= link_to topics_path, class: "welcome-card__cta" do %>
+            <i class="fas fa-rocket"></i>
+            Choose a Topic
+          <% end %>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_locked" %>
-              <% if @my_journal.feedback %>
-                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do %>
-                  <%= render "feedback_complete" %>
-                <% end %>
-              <% else %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "journal_incomplete" %>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     <% end %>
-    <% if @my_journal && @partner_journal && !@partner_journal.feedback && !@my_journal.conversation_status %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to challenge_path(@challenge), class: "status-card-container-link" do %>
-                <%= render "conversation_incomplete" %>
-              <% end %>
-              <%= link_to partnership_journal_path(@partnership, @partner_journal), class: "status-card-container-link" do %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do  %>
-                <%= render "journal_complete" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to challenge_path(@challenge), class: "status-card-container-link" do %>
-                <%= render "conversation_incomplete" %>
-              <% end %>
-              <% if @my_journal.feedback %>
-                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do %>
-                  <%= render "feedback_complete" %>
-                <% end %>
-              <% else %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if @my_journal && @partner_journal && @partner_journal.feedback && !@my_journal.conversation_status %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to challenge_path(@challenge), class: "status-card-container-link" do %>
-                <%= render "conversation_incomplete" %>
-              <% end %>
-              <%= render "feedback_complete" %>
-              <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do  %>
-                <%= render "journal_complete" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to challenge_path(@challenge), class: "status-card-container-link" do %>
-                <%= render "conversation_incomplete" %>
-              <% end %>
-              <% if @my_journal.feedback %>
-                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do %>
-                  <%= render "feedback_complete" %>
-                <% end %>
-              <% else %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if @my_journal && @partner_journal && @partner_journal.feedback && @my_journal.conversation_status %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_complete" %>
-              <%= render "feedback_complete" %>
-              <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do  %>
-                <%= render "journal_complete" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_complete" %>
-              <% if @my_journal.feedback %>
-                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do %>
-                  <%= render "feedback_complete" %>
-                <% end %>
-              <% else %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if @my_journal && @partner_journal && !@partner_journal.feedback && @my_journal.conversation_status %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_complete" %>
-              <%= link_to partnership_journal_path(@partnership, @partner_journal), class: "status-card-container-link" do %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do  %>
-                <%= render "journal_complete" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_complete" %>
-              <% if @my_journal.feedback %>
-                <%= link_to partnership_journal_path(@partnership, @my_journal), class: "status-card-container-link" do %>
-                  <%= render "feedback_complete" %>
-                <% end %>
-              <% else %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if !@my_journal && @partner_journal && !@partner_journal.feedback %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do  %>
-                <%= render "journal_incomplete" %>
-              <% end %>
-              <%= link_to partnership_journal_path(@partnership, @partner_journal), class: "status-card-container-link" do %>
-                <%= render "feedback_incomplete" %>
-              <% end %>
-              <%= render "conversation_locked" %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "conversation_locked" %>
-              <%= render "feedback_incomplete" %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if !@my_journal && @partner_journal && @partner_journal.feedback %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do  %>
-                <%= render "journal_incomplete" %>
-              <% end %>
-              <%= render "conversation_locked" %>
-              <%= render "feedback_complete" %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to challenge_path(@challenge), class: "status-card-container-link" do %>
-                <%= render "conversation_incomplete" %>
-              <% end %>
-              <%= render "feedback_incomplete" %>
-              <%= render "journal_complete" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <% if !@my_journal && !@partner_journal %>
-      <div class="accordion" id="progressAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingYourProgress"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYourProgress" aria-expanded="true" aria-controls="collapseYourProgress">Your Progress</button></h2>
-          <div id="collapseYourProgress" class="accordion-collapse collapse show" aria-labelledby="headingYourProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do  %>
-                <%= render "journal_incomplete" %>
-              <% end %>
-              <%= render "conversation_locked" %>
-              <%= render "feedback_locked" %>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPartnerProgress"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePartnerProgress" aria-expanded="false" aria-controls="collapsePartnerProgress">Partner's Progress</button></h2>
-          <div id="collapsePartnerProgress" class="accordion-collapse collapse" aria-labelledby="headingPartnerProgress" data-bs-parent="#progressAccordion">
-            <div class="accordion-body">
-              <%= render "journal_incomplete" %>
-              <%= render "conversation_locked" %>
-              <%= render "feedback_locked" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    <%= link_to topics_path, class: "status-card-container-link" do %>
-      <div class="new-topic-card"><img class="new-topic-card-image" src="https://images.unsplash.com/vector-1745246426047-d2ee51f1ba9b?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Card Image">
-        <div class="new-topic-card-text">Change Topic</div>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="logo-background-box mb-3">
-      <div class="logo-card">
-      </div>
-    </div>
-    <h2>Welcome to KizunaLingua</h2>
-    <p>Choose a topic to start learning!</p>
-    <%= link_to topics_path, class: "status-card-container-link" do %>
-      <div class="new-topic-card"><img class="new-topic-card-image" src="https://images.unsplash.com/vector-1745246426047-d2ee51f1ba9b?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Card Image">
-        <div class="new-topic-card-text">Choose a Topic</div>
-      </div>
-    <% end %>
-  <% end %>
+  </main>
 </div>

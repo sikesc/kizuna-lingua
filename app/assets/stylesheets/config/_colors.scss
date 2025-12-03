@@ -1,10 +1,43 @@
-// Define variables for your color scheme
+// Kizuna Lingua Color Palette
+// A warm, inviting palette for language learning
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// Primary - Warm Coral (energetic, inviting)
+$coral: #FF6B6B;
+$coral-light: #FF8E8E;
+$coral-dark: #E85555;
+
+// Secondary - Deep Teal (growth, calm, success)
+$teal: #20B2AA;
+$teal-light: #3CCDC5;
+$teal-dark: #189690;
+
+// Accent - Warm Gold (achievement, premium)
+$gold: #FFB347;
+$gold-light: #FFC66D;
+$gold-dark: #E89B2D;
+
+// Neutrals - Slate tones
+$slate-900: #1E293B;
+$slate-800: #334155;
+$slate-700: #475569;
+$slate-600: #64748B;
+$slate-500: #94A3B8;
+$slate-400: #CBD5E1;
+$slate-300: #E2E8F0;
+$slate-200: #F1F5F9;
+$slate-100: #F8FAFC;
+
+// Semantic colors
+$red: #EF4444;
+$blue: #3B82F6;
+$yellow: #F59E0B;
+$orange: #F97316;
+$green: #10B981;
+$gray: $slate-800;
+$light-gray: $slate-100;
+
+// Gradients
+$gradient-coral: linear-gradient(135deg, $coral 0%, $coral-light 100%);
+$gradient-teal: linear-gradient(135deg, $teal 0%, $teal-light 100%);
+$gradient-warm: linear-gradient(135deg, $coral 0%, $gold 100%);
+$gradient-hero: linear-gradient(135deg, $slate-900 0%, $slate-700 100%);
