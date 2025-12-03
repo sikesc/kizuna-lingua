@@ -240,24 +240,68 @@
   flex-shrink: 0;
 }
 
-.topic-progress-card__body {
-  padding: 1rem;
-
-  @media (min-width: 576px) {
-    padding: 1.25rem;
-  }
-}
-
-.topic-progress-card__progress {
-  margin-bottom: 0;
+.topic-progress-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .topic-progress-card__actions {
   display: flex;
   gap: 0.5rem;
+  padding: 0.75rem;
+  background: white;
+  border-top: 1px solid $slate-200;
 
   @media (min-width: 576px) {
     gap: 0.75rem;
+    padding: 1rem;
+  }
+}
+
+.topic-action-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+
+  @media (min-width: 576px) {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    border-radius: 0.625rem;
+  }
+
+  i {
+    font-size: 0.875rem;
+  }
+}
+
+.topic-action-btn--change {
+  background: $slate-100;
+  color: $slate-700;
+
+  &:hover {
+    background: $slate-200;
+    color: $slate-800;
+  }
+}
+
+.topic-action-btn--complete {
+  background: $gradient-teal;
+  color: white;
+  box-shadow: 0 2px 8px rgba($teal, 0.25);
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba($teal, 0.35);
   }
 }
 

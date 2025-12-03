@@ -27,8 +27,8 @@
     <% if @most_recent_topic %>
       <!-- Topic Progress Card -->
       <section class="dashboard-section">
-        <%= link_to topic_path(@most_recent_topic), class: "status-card-container-link" do %>
-          <div class="topic-progress-card">
+        <div class="topic-progress-card">
+          <%= link_to topic_path(@most_recent_topic), class: "topic-progress-card__link" do %>
             <div class="topic-progress-card__hero">
               <% if @most_recent_topic.image.attached? %>
                 <%= image_tag url_for(@most_recent_topic.image), class: "topic-progress-card__image", alt: @most_recent_topic.name %>
@@ -55,30 +55,22 @@
                 </div>
               </div>
             </div>
+          <% end %>
 
-            <div class="topic-progress-card__body">
-              <div class="topic-progress-card__progress">
-                <div class="progress-text">
-                  <span class="progress-text__label">Topic Progress</span>
-                  <span class="progress-text__value"><%= @progress_percentage.round %>% Complete</span>
-                </div>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="width: <%= @progress_percentage %>%"
-                    aria-valuenow="<%= @progress_percentage.round %>" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="topic-progress-card__actions">
+            <% if @progress_percentage >= 100 %>
+              <%= button_to 'Complete Topic',
+                complete_topic_partnership_topic_path(@most_recent),
+                method: :patch,
+                data: { confirm: 'Are you sure you want to finish this topic?' },
+                class: 'topic-action-btn topic-action-btn--complete' %>
+            <% end %>
+            <%= link_to topics_path, class: "topic-action-btn topic-action-btn--change" do %>
+              <i class="fas fa-exchange-alt"></i>
+              Change Topic
+            <% end %>
           </div>
-        <% end %>
-
-        <% if @progress_percentage >= 100 %>
-          <%= button_to 'Mark Topic as Complete!',
-            complete_topic_partnership_topic_path(@most_recent),
-            method: :patch,
-            data: { confirm: 'Are you sure you want to finish this topic?' },
-            class: 'topic-complete-btn' %>
-        <% end %>
+        </div>
       </section>
 
       <!-- Progress Section -->
@@ -313,19 +305,6 @@
         </div>
       </section>
 
-      <!-- Change Topic CTA -->
-      <%= link_to topics_path, class: "cta-card" do %>
-        <div class="cta-card__icon">
-          <i class="fas fa-exchange-alt"></i>
-        </div>
-        <div class="cta-card__content">
-          <h4 class="cta-card__title">Change Topic</h4>
-          <p class="cta-card__subtitle">Explore other topics to learn</p>
-        </div>
-        <div class="cta-card__arrow">
-          <i class="fas fa-chevron-right"></i>
-        </div>
-      <% end %>
 
     <% else %>
       <!-- Welcome State (No Topic Selected) -->
