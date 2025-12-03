@@ -7,6 +7,14 @@ class JournalsController < ApplicationController
 
   def show
     authorize @journal
+    @partnership_id = current_user.partnership.id
+    @challenge_id = @journal.challenge.id
+    @transcription_journal = Journal.where(
+      partnership_id: @partnership_id,
+      challenge_id: @challenge_id
+    ).where.not(
+      transcript: [nil, '']
+    ).first
   end
 
   def edit
