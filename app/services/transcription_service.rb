@@ -1,0 +1,57 @@
+class TranscriptionService
+  def self.call(audio_source)
+    new(audio_source).call
+  end
+
+  def initialize(audio_source)
+    @audio_source = audio_source
+  end
+
+  def call
+    audio_path = resolve_audio_path
+
+    transcript = RubyLLM.transcribe(
+      audio_path,
+      model: "gemini-2.5-flash",
+      prompt: "Return only the verbatim transcript."
+    )
+
+    { success: true, transcript: transcript.text }
+  rescue ArgumentError => e
+    { success: false, error: e.message }
+  rescue => e
+    { success: false, error: "Transcription failed: #{e.message}" }
+  ensure
+    cleanup_tempfile
+  end
+
+  private
+
+  def resolve_audio_path
+    case @audio_source
+    when String
+      @audio_source
+    when ActiveStorage::Blob
+      download_blob_to_tempfile
+    when ActiveStorage::Attached::One
+      download_blob_to_tempfile(@audio_source.blob)
+    when ActionDispatch::Http::UploadedFile
+      @audio_source.tempfile.path
+    else
+      raise ArgumentError, "Unsupported audio source type: #{@audio_source.class}"
+    end
+  end
+
+  def download_blob_to_tempfile(blob = @audio_source)
+    @tempfile = Tempfile.new(["audio", File.extname(blob.filename.to_s)])
+    @tempfile.binmode
+    @tempfile.write(blob.download)
+    @tempfile.rewind
+    @tempfile.path
+  end
+
+  def cleanup_tempfile
+    @tempfile&.close
+    @tempfile&.unlink
+  end
+end
