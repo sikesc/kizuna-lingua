@@ -1,9 +1,15 @@
+// Body styling
+// Uses the new light, airy design
+
 body {
-  background: linear-gradient(120deg, #1a1423, #271e35);
-  color: white;
-  padding-bottom: 60px;
+  background: $slate-100;
+  color: $slate-800;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-// body {
-//   background-color:#eed7c5 ;
-// }
+// Ensure images don't overflow their containers
+img {
+  max-width: 100%;
+  height: auto;
+}

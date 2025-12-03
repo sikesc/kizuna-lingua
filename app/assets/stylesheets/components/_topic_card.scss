@@ -1,27 +1,257 @@
+// Topic Card
+// Mobile-first: hero-style card showcasing the current learning topic
+
+.topic-hero {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba($slate-900, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (min-width: 576px) {
+    border-radius: 1rem;
+    box-shadow: 0 6px 24px rgba($slate-900, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 30px rgba($slate-900, 0.12);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba($slate-900, 0.18);
+    }
+  }
+}
+
+.topic-hero__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+
+  @media (min-width: 576px) {
+    height: 180px;
+  }
+
+  @media (min-width: 768px) {
+    height: 220px;
+  }
+
+  @media (min-width: 992px) {
+    height: 240px;
+  }
+}
+
+.topic-hero__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(to top, rgba($slate-900, 0.9) 0%, rgba($slate-900, 0.5) 50%, transparent 100%);
+
+  @media (min-width: 576px) {
+    padding: 2rem 1.25rem 1.25rem;
+  }
+}
+
+.topic-hero__content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  @media (min-width: 576px) {
+    gap: 1rem;
+  }
+}
+
+.topic-hero__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.topic-hero__label {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $coral-light;
+  margin-bottom: 0.25rem;
+
+  @media (min-width: 576px) {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.topic-hero__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media (min-width: 576px) {
+    font-size: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.topic-hero__action {
+  flex-shrink: 0;
+}
+
+// Progress ring on topic card
+.progress-ring {
+  width: 50px;
+  height: 50px;
+  position: relative;
+
+  @media (min-width: 576px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media (min-width: 768px) {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+.progress-ring__circle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring__background {
+  fill: none;
+  stroke: rgba(white, 0.2);
+  stroke-width: 4;
+}
+
+.progress-ring__progress {
+  fill: none;
+  stroke: $teal;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.progress-ring__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+
+  @media (min-width: 576px) {
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+// Complete button styling
+.topic-complete-btn {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: $gradient-teal;
+  border: none;
+  border-radius: 0.75rem;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba($teal, 0.3);
+
+  @media (min-width: 576px) {
+    margin-top: 1rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($teal, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Legacy support
 .topic-background-box {
-    margin-top: 8px;
-    padding: 20px;
-    background: linear-gradient(120deg,#553745,#774C60);
-    border-radius: 15px;
-    display: block;
-    width: 98%;
-    margin-left: auto;
-    margin-right: auto;
+  background: transparent;
+  padding: 0;
+  margin: 0;
 }
 
 .topic-card {
-    width: 100%;
+  width: 100%;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+
+  @media (min-width: 576px) {
+    height: 180px;
+    border-radius: 1rem;
+  }
+
+  @media (min-width: 768px) {
     height: 200px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 0px 0px 5px rgba(0,0,0,0.7);
-    border-radius: 15px;
-    overflow: hidden;
-    padding: 16px;
+    border-radius: 1.25rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba($slate-900, 0.8) 0%, transparent 100%);
+  }
+}
+
+.topic-name {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem;
+  text-shadow: none;
+
+  @media (min-width: 576px) {
+    font-size: 1.125rem;
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
