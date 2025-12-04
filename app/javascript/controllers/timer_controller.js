@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["display", "startButton", "turnIndicator", "playIcon"]
+  static targets = ["display", "startButton", "turnIndicator", "playIcon", "recordingIndicator"]
 
   static values = {
     duration: { type: Number, default: 10 },
@@ -38,6 +38,7 @@ export default class extends Controller {
     this.startButtonTarget.disabled = true;
     // this.pauseIconTarget.classList.remove('d-none')
     this.setTurnIndicator(this.isPartnerTurn)
+    this.showRecordingIndicator()
 
     this.timerInterval = setInterval(() => {
       this.remainingTime -= 1
@@ -66,6 +67,19 @@ export default class extends Controller {
     this.isTimerRunning = false
     this.startButtonTarget.classList.remove('disabled')
     this.startButtonTarget.disabled = false;
+    this.hideRecordingIndicator()
+  }
+
+  showRecordingIndicator() {
+    if (this.hasRecordingIndicatorTarget) {
+      this.recordingIndicatorTarget.style.display = 'flex'
+    }
+  }
+
+  hideRecordingIndicator() {
+    if (this.hasRecordingIndicatorTarget) {
+      this.recordingIndicatorTarget.style.display = 'none'
+    }
   }
 
   switchTurn() {
@@ -87,11 +101,11 @@ export default class extends Controller {
 
   setTurnIndicator(isPartner) {
     if (isPartner) {
-      this.turnIndicatorTarget.textContent = `Speak in ${this.partnerLanguageValue}`
+      this.turnIndicatorTarget.textContent = `Time to practice in ${this.partnerLanguageValue}`
       this.turnIndicatorTarget.classList.remove('user-turn')
       this.turnIndicatorTarget.classList.add('partner-turn')
     } else {
-      this.turnIndicatorTarget.textContent = `Speak in ${this.userLanguageValue}`
+      this.turnIndicatorTarget.textContent = `Time to practice in ${this.userLanguageValue}`
       this.turnIndicatorTarget.classList.remove('partner-turn')
       this.turnIndicatorTarget.classList.add('user-turn')
     }
