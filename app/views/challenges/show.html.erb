@@ -47,12 +47,18 @@
         </div>
         <!-- Timer Buttons -->
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <button data-timer-target="startButton"
+            <div class="record" data-controller="record" data-record-journal-value="<%= @journal.id %>">
+              <button class="btn btn-primary mt-2" data-record-target="record" data-action="click->record#startRecording click->timer#startTimer" data-timer-target="startButton"><i class="fa-solid fa-pause d-none" data-timer-target="pauseIcon" style="font-size: 1.5rem;"></i> <i class="fa-solid fa-play" data-timer-target="playIcon" style="font-size: 1.5rem; margin-left: 3px;"></i></button>
+              <button class="btn btn-primary mt-2" data-action="click->record#stopRecording click->timer#stopTimer"><i class="fa-solid fa-stop" style="font-size: 1.5rem;"></i></button>
+            </div>
+          <!--<button data-timer-target="startButton"
                   data-action="click->timer#toggleTimer"
             style="display: flex; align-items: center; justify-content: center; width: 4rem; height: 4rem; background: linear-gradient(135deg, #20B2AA 0%, #3CCDC5 100%); border: none; border-radius: 50%; color: white; cursor: pointer; box-shadow: 0 4px 12px rgba(32,178,170,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+
+
             <i class="fa-solid fa-pause d-none" data-timer-target="pauseIcon" style="font-size: 1.5rem;"></i>
             <i class="fa-solid fa-play" data-timer-target="playIcon" style="font-size: 1.5rem; margin-left: 3px;"></i>
-          </button>
+          </button> -->
           <button data-action="click->timer#manualSwitch"
             style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); border: none; border-radius: 0.75rem; color: white; font-size: 0.9375rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(255,107,107,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;">
             <i class="fas fa-exchange-alt"></i>
@@ -94,10 +100,7 @@
           </div>
         </div>
       </div>
-      <div class="record" data-controller="record" data-record-journal-value="<%= @journal.id %>">
-        <button class="btn btn-primary mt-2" data-record-target="record" data-action="click->record#startRecording">Start</button>
-        <button class="btn btn-primary mt-2" data-action="click->record#stopRecording">stop</button>
-      </div>
+
     </div>
   </main>
   <!-- Footer with Completion Button -->
