@@ -119,7 +119,7 @@
                     <p class="task-item__subtitle">Write your entry</p>
                   </div>
                   <div class="task-item__status task-item__status--incomplete">
-                    <i class="fas fa-circle"></i>
+                    <i class="fas fa-hourglass-half"></i>
                   </div>
                 <% end %>
               <% end %>
@@ -149,7 +149,7 @@
                       <p class="task-item__subtitle">Help your partner improve</p>
                     </div>
                     <div class="task-item__status task-item__status--incomplete">
-                      <i class="fas fa-circle"></i>
+                      <i class="fas fa-hourglass-half"></i>
                     </div>
                   <% end %>
                 <% end %>
@@ -193,7 +193,7 @@
                       <p class="task-item__subtitle">Practice speaking</p>
                     </div>
                     <div class="task-item__status task-item__status--incomplete">
-                      <i class="fas fa-circle"></i>
+                      <i class="fas fa-hourglass-half"></i>
                     </div>
                   <% end %>
                 <% end %>
@@ -239,7 +239,7 @@
                   <p class="task-item__subtitle"><%= @partner_journal ? "Entry submitted" : "Not yet written" %></p>
                 </div>
                 <div class="task-item__status <%= @partner_journal ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
-                  <i class="fas <%= @partner_journal ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                  <i class="fas <%= @partner_journal ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
                 </div>
               </div>
 
@@ -254,7 +254,7 @@
                     <p class="task-item__subtitle"><%= @my_journal.feedback ? "Feedback received" : "Awaiting feedback" %></p>
                   </div>
                   <div class="task-item__status <%= @my_journal.feedback ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
-                    <i class="fas <%= @my_journal.feedback ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                    <i class="fas <%= @my_journal.feedback ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
                   </div>
                 </div>
               <% else %>
@@ -283,7 +283,7 @@
                     <p class="task-item__subtitle"><%= @my_journal.conversation_status ? "Completed together" : "Ready to practice" %></p>
                   </div>
                   <div class="task-item__status <%= @my_journal.conversation_status ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
-                    <i class="fas <%= @my_journal.conversation_status ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                    <i class="fas <%= @my_journal.conversation_status ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
                   </div>
                 </div>
               <% else %>
