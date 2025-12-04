@@ -1,12 +1,294 @@
+// Journal Edit Page Styles
+// Consistent with journal show page design
+
+.journal-edit {
+  height: calc(100vh - 56px);
+  height: calc(100dvh - 56px);
+  display: flex;
+  flex-direction: column;
+  background: $slate-100;
+
+  @media (min-width: 576px) {
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
+  }
+}
+
+// Header Section
+.journal-edit__header {
+  background: $gradient-hero;
+  padding: 1rem;
+  flex-shrink: 0;
+
+  @media (min-width: 576px) {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+.journal-edit__header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (min-width: 576px) {
+    gap: 1rem;
+  }
+}
+
+.journal-edit__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: rgba(white, 0.1);
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(white, 0.2);
+    color: white;
+  }
+
+  i {
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 576px) {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+
+.journal-edit__title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.journal-edit__title {
+  font-family: $headers-font;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (min-width: 576px) {
+    font-size: 1.25rem;
+  }
+}
+
+.journal-edit__subtitle {
+  font-size: 0.75rem;
+  color: rgba(white, 0.7);
+  margin: 0.125rem 0 0 0;
+
+  @media (min-width: 576px) {
+    font-size: 0.875rem;
+  }
+}
+
+// Main Content Area
+.journal-edit__main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.journal-edit__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+// Transcript Section
+.journal-edit__transcript-section {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    padding-bottom: 0;
+  }
+}
+
+.journal-edit__transcript {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $slate-800;
+  white-space: pre-wrap;
+
+  @media (min-width: 576px) {
+    font-size: 1rem;
+  }
+}
+
+// Comments Sidebar
+.journal-edit__comments {
+  flex-shrink: 0;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba($slate-900, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+
+  @media (min-width: 768px) {
+    width: 260px;
+    max-height: none;
+    height: 100%;
+  }
+}
+
+.journal-edit__comments-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.journal-edit__comments-header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 1rem;
+  background: $gradient-teal;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  flex-shrink: 0;
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+.journal-edit__comments-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+  flex: 1;
+
+  i {
+    font-size: 2rem;
+    color: $slate-300;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: $slate-600;
+    margin: 0 0 0.25rem 0;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 0.8125rem;
+    color: $slate-400;
+  }
+}
+
+// Comment Cards
+.journal-comment-card {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid $slate-200;
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $slate-100;
+  }
+}
+
+.journal-comment-card--active {
+  background: rgba($gold, 0.15);
+  box-shadow: inset 3px 0 0 $gold;
+}
+
+.journal-comment-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+
+  strong {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $slate-700;
+  }
+}
+
+.journal-comment-card__time {
+  font-size: 0.625rem;
+  color: $slate-400;
+}
+
+.journal-comment-card__content {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: $slate-600;
+  margin: 0;
+}
+
+// Floating Comment Button
 .comment-floating-btn {
   position: absolute;
   z-index: 1000;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
   border: none;
-  font-size: 0.85rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  background: #ffcc66;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba($slate-900, 0.2);
+  background: $gradient-coral;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba($coral, 0.35);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  i {
+    font-size: 0.6875rem;
+  }
 }
 
 .comment-floating-btn.hidden {
@@ -14,45 +296,15 @@
   pointer-events: none;
 }
 
-.journal-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-  gap: 1.5rem;
-}
-
-.journal-transcript {
-  white-space: pre-wrap;  /* preserve newlines */
-  line-height: 1.6;
-}
-
+// Text Highlight
 .journal-highlight {
-  background-color: rgba(255, 229, 100, 0.7);
+  background-color: rgba($gold, 0.4);
   border-radius: 2px;
   padding: 0 2px;
   cursor: pointer;
-}
+  transition: background-color 0.2s ease;
 
-.journal-comments {
-  max-height: 70vh;
-  overflow-y: auto;
-  border-left: 1px solid #eee;
-  padding-left: 1rem;
-  font-size: 0.9rem;
-}
-
-.journal-comment-card {
-  margin-bottom: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-}
-
-.journal-comment-card--active {
-  background: #fff7d6;
-  box-shadow: 0 0 0 1px #f2c94c;
-}
-
-.journal-comment-selected {
-  font-size: 0.8rem;
-  color: #777;
-  margin-bottom: 0.25rem;
+  &:hover {
+    background-color: rgba($gold, 0.6);
+  }
 }

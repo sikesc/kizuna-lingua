@@ -1,26 +1,62 @@
-<div class="container mt-5" data-controller="comment-linker">
-  <div class="journal-show" data-controller="commentable" data-commentable-journal-id-value="<%= @journal.id %>">
-    <div class="journal-main">
-      <% @transcript.each_with_index do |t, index| %>
-        <div id="transcript-<%= index %>" data-commentable-target="transcript" data-transcript-index="<%= index %>"><%=render_transcript_with_comments(t, @journal, index) %></div>
+<div class="journal-edit" data-controller="comment-linker">
+  <!-- Header Section -->
+  <header class="journal-edit__header">
+    <div class="journal-edit__header-content">
+      <%= link_to partnership_journals_path(@journal.partnership), class: "journal-edit__back" do %>
+        <i class="fas fa-arrow-left"></i>
       <% end %>
-    </div>
-    <button
-    type="button"
-    class="comment-floating-btn hidden"
-    data-commentable-target="button"
-    data-action="click->commentable#addComment">
-      + Comment
-    </button>
-  </div>
-  <aside class="journal-comments"
-         data-comment-linker-target="comments">
-    <% @journal.comments.order(:created_at).each do |comment| %>
-      <div class="journal-comment-card"
-           data-comment-id="<%= comment.id %>">
-        <strong><%= comment.user.name || comment.user.email %></strong>
-        <p><%= comment.content %></p>
+      <div class="journal-edit__title-group">
+        <h1 class="journal-edit__title"><%= @journal.challenge.topic.name %></h1>
+        <p class="journal-edit__subtitle">Conversation Transcript</p>
       </div>
-    <% end %>
-  </aside>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="journal-edit__main" data-controller="commentable" data-commentable-journal-id-value="<%= @journal.id %>">
+    <div class="journal-edit__content">
+      <!-- Transcript Section -->
+      <div class="journal-edit__transcript-section">
+        <% @transcript.each_with_index do |t, index| %>
+          <div class="journal-edit__transcript" id="transcript-<%= index %>" data-commentable-target="transcript" data-transcript-index="<%= index %>"><%= render_transcript_with_comments(t, @journal, index) %></div>
+        <% end %>
+      </div>
+
+      <!-- Comments Sidebar -->
+      <aside class="journal-edit__comments" data-comment-linker-target="comments">
+        <div class="journal-edit__comments-header">
+          <i class="fas fa-comments"></i>
+          <span>Comments</span>
+        </div>
+        <div class="journal-edit__comments-list">
+          <% if @journal.comments.any? %>
+            <% @journal.comments.order(:created_at).each do |comment| %>
+              <div class="journal-comment-card" data-comment-id="<%= comment.id %>">
+                <div class="journal-comment-card__header">
+                  <strong><%= comment.user.name || comment.user.email %></strong>
+                  <span class="journal-comment-card__time"><%= comment.created_at.strftime("%l:%M %p") %></span>
+                </div>
+                <p class="journal-comment-card__content"><%= comment.content %></p>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="journal-edit__comments-empty">
+              <i class="fas fa-comment-slash"></i>
+              <p>No comments yet</p>
+              <span>Select text to add a comment</span>
+            </div>
+          <% end %>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Floating Comment Button -->
+    <button
+      type="button"
+      class="comment-floating-btn hidden"
+      data-commentable-target="button"
+      data-action="click->commentable#addComment">
+      <i class="fas fa-plus"></i> Comment
+    </button>
+  </main>
 </div>
