@@ -4,10 +4,10 @@ class PartnershipTopicsController < ApplicationController
     @partnership_topic = PartnershipTopic.new
     @partnership_topic.topic = @topic
     @partnership_topic.partnership = current_user.partnership
-    @partnership_topic.status = "not started"
+    @partnership_topic.status = "in progress"
     authorize @partnership_topic
     if @partnership_topic.save
-      redirect_to dashboard_path, notice: "Topic '#{@topic.name}' has been added."
+      redirect_to dashboard_path, notice: "Topic '#{@topic.name}' has been selected."
     else
       @topics = Topic.all
       render :index, status: :unprocessable_entity
