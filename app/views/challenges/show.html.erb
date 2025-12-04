@@ -30,9 +30,9 @@
             <%= @challenge.conversation["jp"] %>
           <% end %>
         </div>
-        <div style="padding: 0.875rem 1.25rem; background: #F1F5F9; border-top: 1px solid #E2E8F0; display: flex; align-items: center; gap: 0.625rem;">
-          <i class="fas fa-info-circle" style="font-size: 0.875rem; color: #64748B; flex-shrink: 0;"></i>
-          <p style="margin: 0; font-size: 0.8125rem; color: #64748B; line-height: 1.5;">Press the start button to start the challenge and start recording your conversation. This way your conversation can be reviewed at a later time. The speaking language will change every 2 minutes. Check below the recorder for a hint!</p>
+        <div style="padding: 0.625rem 1rem; background: #F1F5F9; border-top: 1px solid #E2E8F0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fas fa-info-circle" style="font-size: 0.75rem; color: #64748B; flex-shrink: 0;"></i>
+          <p style="margin: 0; font-size: 0.6875rem; color: #64748B; line-height: 1.4;">Press the button to start recording your conversation. Your conversation can be reviewed at a later time. The speaking language will change every 2 minutes. Check below the recorder for a hint!</p>
         </div>
       </div>
       <!-- Timer Card -->
@@ -48,8 +48,7 @@
           <!-- Recording Controls -->
           <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
             <button data-record-target="record" data-action="click->record#startRecording click->timer#startTimer" data-timer-target="startButton" class="recording-btn">
-              <i class="fa-solid fa-pause d-none" data-timer-target="pauseIcon" style="font-size: 1.5rem;"></i>
-              <i class="fa-solid fa-play" data-timer-target="playIcon" style="font-size: 1.5rem; margin-left: 3px;"></i>
+              <i class="fa-solid fa-microphone" data-timer-target="micIcon" style="font-size: 1.5rem;"></i>
             </button>
             <button data-action="click->record#stopRecording click->timer#stopTimer"
               style="display: flex; align-items: center; justify-content: center; width: 4rem; height: 4rem; background: linear-gradient(135deg, #EF4444 0%, #F87171 100%); border: none; border-radius: 50%; color: white; cursor: pointer; box-shadow: 0 4px 12px rgba(239,68,68,0.4); transition: transform 0.2s ease, box-shadow 0.2s ease;">
@@ -63,7 +62,7 @@
           <!-- Switch Language Button -->
           <div style="display: flex; justify-content: center;">
             <button data-action="click->timer#manualSwitch"
-              style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 2rem; color: white; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background 0.2s ease;">
+              style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: linear-gradient(135deg, #475569 0%, #64748B 100%); border: none; border-radius: 0.75rem; color: white; font-size: 0.875rem; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(71,85,105,0.3);">
               <i class="fas fa-exchange-alt" style="font-size: 0.75rem;"></i>
               Switch Language
             </button>
