@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+
   def set_notifications
     @notifications = Noticed::Notification.where(recipient: current_user).newest_first if current_user
   end
