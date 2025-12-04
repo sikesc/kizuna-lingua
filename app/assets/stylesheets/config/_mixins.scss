@@ -1,0 +1,11 @@
+// Mixins for Kizuna Lingua
+
+// Hover mixin - only applies hover styles on devices that support hover
+// This prevents "sticky" hover states on touch devices
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}

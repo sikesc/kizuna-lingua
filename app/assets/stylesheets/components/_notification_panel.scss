@@ -119,9 +119,11 @@ body.no-scroll {
     line-height: 1;
     transition: background 0.2s ease, color 0.2s ease;
 
-    &:hover {
-      background: rgba(white, 0.2);
-      color: white;
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(white, 0.2);
+        color: white;
+      }
     }
   }
 }
@@ -165,9 +167,11 @@ body.no-scroll {
     }
   }
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba($slate-900, 0.1);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($slate-900, 0.1);
+    }
   }
 
   &:last-child {

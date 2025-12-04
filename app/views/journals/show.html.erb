@@ -89,8 +89,8 @@
       <% end %>
     </div>
   </main>
-  <!-- Feedback Input (only shown if user can provide feedback) -->
-  <% if policy(@journal).update? %>
+  <!-- Feedback Input (only shown if user can provide feedback and no feedback exists yet) -->
+  <% if policy(@journal).update? && @journal.feedback.blank? %>
     <footer style="flex-shrink: 0; background: white; padding: 1rem 1.5rem; border-top: 1px solid #E2E8F0; box-shadow: 0 -4px 16px rgba(30,41,59,0.05);">
       <%= simple_form_for @journal, html: { style: "max-width: 1000px; margin: 0 auto;" } do |f| %>
         <div style="display: flex; flex-direction: column; gap: 0.75rem; background: #F8FAFC; border-radius: 1rem; padding: 1rem; border: 1px solid #E2E8F0;">

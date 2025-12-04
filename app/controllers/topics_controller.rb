@@ -71,7 +71,12 @@ class TopicsController < ApplicationController
     @all_grammar_points_by_level = @topic.grammar_points.where(language: user_language).group_by(&:level).sort_by { |level, _| level_order.index(level.downcase) || 999 }.to_h
 
     @challenge = @topic.challenges.first
-    @journal = Journal.new
+    @existing_journal = Journal.find_by(
+      user: current_user,
+      challenge: @challenge,
+      partnership: current_user.partnership
+    )
+    @journal = @existing_journal || Journal.new
     authorize @topic
   end
 

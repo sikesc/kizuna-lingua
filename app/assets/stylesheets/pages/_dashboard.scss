@@ -139,8 +139,10 @@
     font-size: 0.875rem;
   }
 
-  &:hover {
-    color: $coral-dark;
+  @media (hover: hover) {
+    &:hover {
+      color: $coral-dark;
+    }
   }
 }
 
@@ -290,9 +292,11 @@
   background: $slate-100;
   color: $slate-700;
 
-  &:hover {
-    background: $slate-200;
-    color: $slate-800;
+  @media (hover: hover) {
+    &:hover {
+      background: $slate-200;
+      color: $slate-800;
+    }
   }
 }
 
@@ -301,8 +305,10 @@
   color: white;
   box-shadow: 0 2px 8px rgba($teal, 0.25);
 
-  &:hover {
-    box-shadow: 0 4px 12px rgba($teal, 0.35);
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 4px 12px rgba($teal, 0.35);
+    }
   }
 }
 
