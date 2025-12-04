@@ -14,11 +14,14 @@
   <!-- Content Container -->
   <main style="flex: 1; overflow-y: auto; padding: 1.5rem 1rem;">
     <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
-      <div class="transcription-button">
-        <% if @transcription_journal %>
-          <%= link_to "Conversation Transcript", edit_journal_path(@transcription_journal), class: "btn btn-primary" %>
-        <% end %>
-      </div>
+      <% if @transcription_journal %>
+        <div style="display: flex; justify-content: center;">
+          <%= link_to edit_journal_path(@transcription_journal), style: "display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: linear-gradient(135deg, #475569 0%, #64748B 100%); border-radius: 0.75rem; color: white; text-decoration: none; font-size: 0.875rem; font-weight: 600; box-shadow: 0 2px 8px rgba(71,85,105,0.3);" do %>
+            <i class="fas fa-file-audio" style="font-size: 0.875rem;"></i>
+            <span>Conversation Transcript</span>
+          <% end %>
+        </div>
+      <% end %>
       <!-- Journal Entry Card (right aligned) -->
       <div style="display: flex; justify-content: flex-end; padding-left: 2rem;">
         <div style="background: white; border-radius: 1rem; box-shadow: 0 4px 16px rgba(30,41,59,0.08); overflow: hidden;">
