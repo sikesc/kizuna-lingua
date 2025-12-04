@@ -9,7 +9,10 @@ export default class extends Controller {
   };
 
   connect() {
-    this.showAlert();
+    // Only show alert if there's a message
+    if (this.messageValue && this.messageValue.trim() !== "") {
+      this.showAlert();
+    }
     // Remove the element after showing to prevent re-triggering on Turbo navigation
     this.element.remove();
   }
@@ -18,15 +21,19 @@ export default class extends Controller {
     const isSuccess = this.typeValue === "notice";
 
     Swal.fire({
-      title: isSuccess ? "Success!" : "Oops...",
       text: this.messageValue,
       icon: isSuccess ? "success" : "error",
-      confirmButtonColor: "#3D88BA",
-      background: "#271e35",
-      color: "#ffffff",
-      timer: 3000,
-      timerProgressBar: true,
+      iconColor: isSuccess ? "#20B2AA" : "#EF4444",
       showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      background: "#FFFFFF",
+      color: "#1E293B",
+      backdrop: "rgba(30, 41, 59, 0.4)",
+      customClass: {
+        popup: "swal-kizuna-popup",
+        timerProgressBar: "swal-kizuna-progress",
+      },
     });
   }
 }

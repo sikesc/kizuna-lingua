@@ -1,0 +1,78 @@
+// Sweet Alert custom styles for Kizuna Lingua
+// Minimal, professional styling consistent with app design
+
+.swal-kizuna-popup {
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(30, 41, 59, 0.15);
+  padding: 2rem 1.5rem;
+  border: 1px solid $slate-200;
+
+  .swal2-icon {
+    border: none;
+    margin-bottom: 1rem;
+
+    &.swal2-success {
+      .swal2-success-ring {
+        border-color: rgba($teal, 0.3);
+      }
+    }
+
+    &.swal2-error {
+      border-color: transparent;
+
+      .swal2-x-mark-line-left,
+      .swal2-x-mark-line-right {
+        background-color: $red;
+      }
+    }
+  }
+
+  .swal2-html-container {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $slate-700;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.swal-kizuna-progress {
+  background: $teal;
+  height: 4px;
+  border-radius: 0 0 1rem 1rem;
+}
+
+// Confirmation dialogs (for future use)
+.swal-kizuna-confirm-btn {
+  background: $coral;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: $coral-dark;
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($coral, 0.3);
+  }
+}
+
+.swal-kizuna-cancel-btn {
+  background: $slate-200;
+  color: $slate-700;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: $slate-300;
+    }
+  }
+}

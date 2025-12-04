@@ -54,8 +54,10 @@
   min-width: 140px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
   }
 
   &:disabled {
@@ -67,16 +69,20 @@
 .timer-switch-btn {
   background: $gradient-coral;
 
-  &:hover:not(:disabled) {
-    box-shadow: 0 4px 12px rgba($coral, 0.4);
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba($coral, 0.4);
+    }
   }
 }
 
 .timer-start-btn {
   background: $gradient-teal;
 
-  &:hover:not(:disabled) {
-    box-shadow: 0 4px 12px rgba($teal, 0.4);
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba($teal, 0.4);
+    }
   }
 
   i {

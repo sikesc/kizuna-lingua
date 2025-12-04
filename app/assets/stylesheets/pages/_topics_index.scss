@@ -46,9 +46,11 @@
   transition: background 0.2s ease;
   flex-shrink: 0;
 
-  &:hover {
-    background: rgba(white, 0.2);
-    color: white;
+  @media (hover: hover) {
+    &:hover {
+      background: rgba(white, 0.2);
+      color: white;
+    }
   }
 
   i {
@@ -182,16 +184,20 @@
   transition: color 0.2s ease;
   white-space: nowrap;
 
-  &:hover {
-    color: $slate-800;
+  @media (hover: hover) {
+    &:hover {
+      color: $slate-800;
+    }
   }
 
   &--active {
     color: $coral;
     font-weight: 600;
 
-    &:hover {
-      color: $coral;
+    @media (hover: hover) {
+      &:hover {
+        color: $coral;
+      }
     }
   }
 
@@ -230,8 +236,10 @@
 .topic-card {
   transition: box-shadow 0.2s ease;
 
-  &:hover {
-    box-shadow: 0 8px 20px rgba($slate-900, 0.15) !important;
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 8px 20px rgba($slate-900, 0.15) !important;
+    }
   }
 
   @media (min-width: 576px) {
@@ -258,9 +266,11 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 100;
 
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba($coral, 0.5);
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba($coral, 0.5);
+    }
   }
 
   i {
@@ -268,7 +278,12 @@
   }
 
   @media (min-width: 576px) {
-    bottom: 2rem;
+    bottom: 5rem;
+    right: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    bottom: 5rem;
     right: 2rem;
   }
 }
@@ -349,8 +364,10 @@
   cursor: pointer;
   transition: background 0.2s ease;
 
-  &:hover {
-    background: rgba(white, 0.3);
+  @media (hover: hover) {
+    &:hover {
+      background: rgba(white, 0.3);
+    }
   }
 
   i {
@@ -473,10 +490,12 @@
     background: $gradient-coral;
     color: white;
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba($coral, 0.3);
-      color: white;
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($coral, 0.3);
+        color: white;
+      }
     }
   }
 
@@ -484,8 +503,10 @@
     background: $slate-100;
     color: $slate-700;
 
-    &:hover {
-      background: $slate-200;
+    @media (hover: hover) {
+      &:hover {
+        background: $slate-200;
+      }
     }
   }
 
