@@ -4,17 +4,17 @@
       <div class="auth-card__icon">
         <i class="fas fa-user-plus"></i>
       </div>
-      <h1 class="auth-card__title">Create Account</h1>
-      <p class="auth-card__subtitle">Join KizunaLingua and start your language journey</p>
+      <h1 class="auth-card__title"><%= t('auth.register.title') %></h1>
+      <p class="auth-card__subtitle"><%= t('auth.register.subtitle') %></p>
     </div>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
-      <%= f.error_notification message: "Please fix the errors below:", class: "auth-form__error-notification" %>
+      <%= f.error_notification message: t('auth.register.fix_errors'), class: "auth-form__error-notification" %>
 
       <div class="auth-form__section">
         <h3 class="auth-form__section-title">
           <i class="fas fa-user"></i>
-          Account Details
+          <%= t('auth.register.account_details') %>
         </h3>
         <%= f.input :name,
                     required: true,
@@ -29,7 +29,7 @@
                     wrapper_html: { class: "auth-form__group" } %>
         <%= f.input :password,
                     required: true,
-                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    hint: (@minimum_password_length ? t('auth.register.characters_minimum', count: @minimum_password_length) : nil),
                     input_html: { autocomplete: "new-password", class: "auth-form__input" },
                     label_html: { class: "auth-form__label" },
                     hint_html: { class: "auth-form__hint" },
@@ -44,26 +44,26 @@
       <div class="auth-form__section">
         <h3 class="auth-form__section-title">
           <i class="fas fa-language"></i>
-          Language Preferences
+          <%= t('auth.register.language_preferences') %>
         </h3>
         <%= f.input :native_language,
-                    collection: [['English', 'english'], ['Japanese', 'japanese']],
+                    collection: [[t('languages.english'), 'english'], [t('languages.japanese'), 'japanese']],
                     required: true,
-                    prompt: 'Select your native language',
+                    prompt: t('auth.register.native_language_prompt'),
                     input_html: { class: "auth-form__select" },
                     label_html: { class: "auth-form__label" },
                     wrapper_html: { class: "auth-form__group" } %>
         <%= f.input :learning_language,
-                    collection: [['English', 'english'], ['Japanese', 'japanese']],
+                    collection: [[t('languages.english'), 'english'], [t('languages.japanese'), 'japanese']],
                     required: true,
-                    prompt: 'Select the language you want to learn',
+                    prompt: t('auth.register.learning_language_prompt'),
                     input_html: { class: "auth-form__select" },
                     label_html: { class: "auth-form__label" },
                     wrapper_html: { class: "auth-form__group" } %>
         <%= f.input :learning_level,
-                    collection: [['Beginner', 'beginner'], ['Intermediate', 'intermediate'], ['Advanced', 'advanced']],
+                    collection: [[t('levels.beginner'), 'beginner'], [t('levels.intermediate'), 'intermediate'], [t('levels.advanced'), 'advanced']],
                     required: true,
-                    prompt: 'Select your current level',
+                    prompt: t('auth.register.level_prompt'),
                     input_html: { class: "auth-form__select" },
                     label_html: { class: "auth-form__label" },
                     wrapper_html: { class: "auth-form__group" } %>
@@ -72,7 +72,7 @@
       <div class="auth-form__section">
         <h3 class="auth-form__section-title">
           <i class="fas fa-camera"></i>
-          Profile Photo <span class="auth-form__optional">(optional)</span>
+          <%= t('auth.register.profile_photo') %> <span class="auth-form__optional"><%= t('auth.register.optional') %></span>
         </h3>
         <%= f.input :photo,
                     as: :file,
@@ -82,7 +82,7 @@
       </div>
 
       <div class="auth-form__actions">
-        <%= f.button :submit, "Create Account", class: "auth-form__submit" %>
+        <%= f.button :submit, t('auth.register.button'), class: "auth-form__submit" %>
       </div>
     <% end %>
 

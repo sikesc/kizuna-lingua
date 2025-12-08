@@ -1,20 +1,20 @@
 <div class="auth-links">
   <%- if controller_name != 'sessions' %>
     <div class="auth-links__item auth-links__item--primary">
-      <span class="auth-links__text">Already have an account?</span>
+      <span class="auth-links__text"><%= t('auth.links.already_have_account') %></span>
       <%= link_to new_session_path(resource_name), class: "auth-links__link" do %>
         <i class="fas fa-sign-in-alt"></i>
-        Log in
+        <%= t('auth.links.log_in') %>
       <% end %>
     </div>
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <div class="auth-links__item auth-links__item--primary">
-      <span class="auth-links__text">Don't have an account?</span>
+      <span class="auth-links__text"><%= t('auth.links.dont_have_account') %></span>
       <%= link_to new_registration_path(resource_name), class: "auth-links__link auth-links__link--coral" do %>
         <i class="fas fa-user-plus"></i>
-        Sign up
+        <%= t('auth.links.sign_up') %>
       <% end %>
     </div>
   <% end %>
@@ -22,7 +22,7 @@
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
     <div class="auth-links__item">
       <%= link_to new_password_path(resource_name), class: "auth-links__link auth-links__link--subtle" do %>
-        Forgot your password?
+        <%= t('auth.links.forgot_password') %>
       <% end %>
     </div>
   <% end %>
@@ -30,7 +30,7 @@
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <div class="auth-links__item">
       <%= link_to new_confirmation_path(resource_name), class: "auth-links__link auth-links__link--subtle" do %>
-        Didn't receive confirmation instructions?
+        <%= t('auth.links.no_confirmation') %>
       <% end %>
     </div>
   <% end %>
@@ -38,19 +38,19 @@
   <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
     <div class="auth-links__item">
       <%= link_to new_unlock_path(resource_name), class: "auth-links__link auth-links__link--subtle" do %>
-        Didn't receive unlock instructions?
+        <%= t('auth.links.no_unlock') %>
       <% end %>
     </div>
   <% end %>
 
   <%- if devise_mapping.omniauthable? %>
     <div class="auth-links__divider">
-      <span>or</span>
+      <span><%= t('common.or') %></span>
     </div>
     <%- resource_class.omniauth_providers.each do |provider| %>
       <div class="auth-links__item">
         <%= button_to omniauth_authorize_path(resource_name, provider), class: "auth-links__oauth", data: { turbo: false } do %>
-          Sign in with <%= OmniAuth::Utils.camelize(provider) %>
+          <%= t('auth.links.sign_in_with', provider: OmniAuth::Utils.camelize(provider)) %>
         <% end %>
       </div>
     <% end %>

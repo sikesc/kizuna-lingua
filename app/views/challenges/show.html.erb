@@ -10,7 +10,7 @@
       <% end %>
       <div style="flex: 1; min-width: 0;">
         <h1 style="font-size: 1.125rem; font-weight: 700; color: white; margin: 0; line-height: 1.2;"><%= @topic.name %></h1>
-        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0 0 0;">Conversation Practice</p>
+        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0 0 0;"><%= t('challenges.conversation_practice') %></p>
       </div>
     </div>
   </header>
@@ -21,7 +21,7 @@
       <div style="background: white; border-radius: 1rem; box-shadow: 0 4px 16px rgba(30,41,59,0.08); overflow: hidden;">
         <div style="background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%); padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fas fa-comment-alt" style="font-size: 0.875rem; color: white;"></i>
-          <span style="font-size: 0.8125rem; font-weight: 600; color: white;">Conversation Topic</span>
+          <span style="font-size: 0.8125rem; font-weight: 600; color: white;"><%= t('challenges.conversation_topic') %></span>
         </div>
         <div style="padding: 1.25rem; font-size: 1rem; line-height: 1.7; color: #334155;">
           <% if current_user.learning_language == "japanese" %>
@@ -32,14 +32,14 @@
         </div>
         <div style="padding: 0.625rem 1rem; background: #F1F5F9; border-top: 1px solid #E2E8F0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fas fa-info-circle" style="font-size: 0.75rem; color: #64748B; flex-shrink: 0;"></i>
-          <p style="margin: 0; font-size: 0.6875rem; color: #64748B; line-height: 1.4;">Press the button to start recording your conversation. Your conversation can be reviewed at a later time. The speaking language will change every 2 minutes. Check below the recorder for a hint!</p>
+          <p style="margin: 0; font-size: 0.6875rem; color: #64748B; line-height: 1.4;"><%= t('challenges.recording_instructions') %></p>
         </div>
       </div>
       <!-- Timer Card -->
       <div style="background: linear-gradient(135deg, #1E293B 0%, #475569 100%); border-radius: 1rem; box-shadow: 0 4px 16px rgba(30,41,59,0.15); overflow: hidden;">
         <!-- Turn Indicator Banner -->
         <div data-timer-target="turnIndicator" style="padding: 1rem 1.5rem; background: rgba(255,255,255,0.1); font-size: 1.25rem; font-weight: 600; color: white; text-align: center;">
-          Start Conversation in <%= current_user.learning_language.capitalize %>
+          <%= t('challenges.start_conversation_in', language: current_user.learning_language.capitalize) %>
         </div>
         <!-- Hidden Timer Display (keeps functionality) -->
         <div data-timer-target="display" style="display: none;"></div>
@@ -64,7 +64,7 @@
             <button data-action="click->timer#manualSwitch"
               style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: linear-gradient(135deg, #475569 0%, #64748B 100%); border: none; border-radius: 0.75rem; color: white; font-size: 0.875rem; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(71,85,105,0.3);">
               <i class="fas fa-exchange-alt" style="font-size: 0.75rem;"></i>
-              Switch Language
+              <%= t('challenges.switch_language') %>
             </button>
           </div>
         </div>
@@ -78,8 +78,8 @@
               <i class="fas fa-lightbulb" style="font-size: 1rem; color: white;"></i>
             </div>
             <div style="text-align: left;">
-              <div style="font-size: 0.9375rem; font-weight: 600; color: #1E293B;">Need a Hint?</div>
-              <div style="font-size: 0.75rem; color: #64748B;">View grammar points for this conversation</div>
+              <div style="font-size: 0.9375rem; font-weight: 600; color: #1E293B;"><%= t('challenges.need_hint') %></div>
+              <div style="font-size: 0.75rem; color: #64748B;"><%= t('challenges.view_grammar_points') %></div>
             </div>
           </div>
           <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: #94A3B8; transition: transform 0.2s ease;"></i>
@@ -92,10 +92,10 @@
                   <h5 style="font-size: 1rem; font-weight: 600; color: #1E293B; margin: 0;"><%= grammar_point.title %></h5>
                 </div>
                 <p style="font-size: 0.875rem; color: #475569; margin: 0 0 0.5rem 0; line-height: 1.6;">
-                  <strong style="color: #1E293B;">Explanation:</strong> <%= grammar_point.explanation %>
+                  <strong style="color: #1E293B;"><%= t('topics.show.explanation') %>:</strong> <%= grammar_point.explanation %>
                 </p>
                 <p style="font-size: 0.875rem; color: #475569; margin: 0; line-height: 1.6;">
-                  <strong style="color: #1E293B;">Examples:</strong> <%= grammar_point.examples %>
+                  <strong style="color: #1E293B;"><%= t('topics.show.examples') %>:</strong> <%= grammar_point.examples %>
                 </p>
               </div>
             <% end %>
@@ -113,7 +113,7 @@
                     id: 'completion-form-button',
                     style: "display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, #20B2AA 0%, #3CCDC5 100%); border: none; border-radius: 0.75rem; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(32,178,170,0.3); transition: transform 0.2s ease, box-shadow 0.2s ease; width: 100%; max-width: 400px;" do %>
         <i class="fas fa-check-circle"></i>
-        <span>Conversation Completed</span>
+        <span><%= t('challenges.conversation_completed') %></span>
       <% end %>
     </div>
   </footer>

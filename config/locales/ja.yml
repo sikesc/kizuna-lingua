@@ -1,2 +1,264 @@
 ja:
   app_name: "絆リングア"
+
+  # Common
+  common:
+    back: "戻る"
+    cancel: "キャンセル"
+    submit: "送信"
+    save: "保存"
+    update: "更新"
+    delete: "削除"
+    edit: "編集"
+    view: "表示"
+    ago: "前"
+    or: "または"
+
+  # Languages
+  languages:
+    english: "英語"
+    japanese: "日本語"
+
+  # Proficiency levels
+  levels:
+    beginner: "初級"
+    intermediate: "中級"
+    advanced: "上級"
+
+  # Navigation
+  nav:
+    home: "ホーム"
+    messages: "メッセージ"
+    login: "ログイン"
+    profile: "プロフィール"
+    select_new_topic: "新しいトピックを選ぶ"
+    sign_out: "ログアウト"
+    log_out: "ログアウト"
+    action: "アクション"
+    another_action: "別のアクション"
+
+  # Footer
+  footer:
+    notifications: "通知"
+
+  # Landing page
+  landing:
+    badge: "言語学習を再考する"
+    title_line1: "一緒に言語を"
+    title_line2: "学ぼう"
+    subtitle: "パートナーとつながり、練習し、日記を書き、フィードバックを交換し、本物の会話をしましょう。言語学習は友達と一緒の方が楽しいです。"
+    get_started: "無料で始める"
+    log_in: "ログイン"
+
+    # How it works section
+    how_it_works:
+      title: "使い方"
+      subtitle: "パートナーと一緒に学ぶ体系的なアプローチ"
+
+    # Features
+    features:
+      write_journals:
+        title: "日記を書く"
+        description: "一緒に選んだトピックに基づいたガイド付きプロンプトで、学習中の言語で書く練習をしましょう。"
+      give_feedback:
+        title: "フィードバックする"
+        description: "パートナーの日記に添削や励ましを提供して、上達を手伝いましょう。"
+      have_conversations:
+        title: "会話する"
+        description: "現在のトピックに合わせた構造化された会話練習でスピーキングを練習しましょう。"
+
+    # Partnership section
+    partnership:
+      title: "パートナーシップの力"
+      description: "「絆」は日本語で深いつながりを意味します。同じ目標を持つ人との有意義なつながりを通じて言語を学ぶことが最良の方法だと信じています。"
+      stats:
+        motivation: "モチベーション倍増"
+        real_practice: "本物の練習"
+        partner_needed: "パートナー1人"
+
+    # CTA section
+    cta:
+      title: "学習を始める準備はできましたか？"
+      subtitle: "絆リングアに参加して、今日から言語学習の旅を始めましょう。"
+      create_account: "アカウントを作成"
+
+  # Dashboard
+  dashboard:
+    welcome_back: "おかえりなさい、%{name}さん"
+    continue_journey: "言語学習を続けましょう"
+    current_topic: "現在のトピック"
+    your_progress: "あなたの進捗"
+    complete_to_progress: "これらを完了して進みましょう"
+    your_tasks: "あなたのタスク"
+    partner_tasks: "%{name}さんのタスク"
+    partner_progress: "パートナーの進捗"
+
+    # Task items
+    tasks:
+      journal_entry: "日記"
+      your_writing: "あなたのライティング練習"
+      write_entry: "日記を書く"
+      partner_guidance: "パートナーへのガイダンス"
+      feedback_provided: "フィードバック済み"
+      help_partner: "パートナーの上達を手伝う"
+      waiting_partner_journal: "パートナーの日記を待っています"
+      conversation: "会話"
+      practice_complete: "練習完了"
+      practice_speaking: "スピーキング練習"
+      complete_journals_first: "まず日記を完了してください"
+      entry_submitted: "日記提出済み"
+      not_yet_written: "まだ書いていません"
+      your_feedback: "あなたへのフィードバック"
+      feedback_received: "フィードバック受信済み"
+      awaiting_feedback: "フィードバック待ち"
+      write_journal_first: "まず日記を書いてください"
+      completed_together: "一緒に完了"
+      ready_to_practice: "練習準備完了"
+
+    # Topic actions
+    complete_topic: "トピック完了"
+    complete_topic_confirm: "このトピックを終了してもよろしいですか？"
+    change_topic: "トピック変更"
+
+    # Welcome state
+    welcome:
+      title: "絆リングアへようこそ"
+      description: "パートナーと一緒に探求するトピックを選んで、言語学習の旅を始めましょう。"
+      choose_topic: "トピックを選ぶ"
+
+  # Topics
+  topics:
+    explore: "トピックを探す"
+    choose_subtitle: "パートナーと学ぶトピックを選んでください"
+    search_placeholder: "トピックを検索..."
+    filters:
+      all: "すべて"
+      new: "新規"
+      in_progress: "進行中"
+      completed: "完了"
+    generate_new: "新しいトピックを生成"
+    title_label: "新しいトピックのタイトル"
+    title_placeholder: "例：「旅行の計画」、「好きな本」"
+    create_topic: "トピック作成"
+
+    # Topic status
+    status:
+      completed: "完了"
+      in_progress: "進行中"
+      new: "新規"
+
+    # Topic modal actions
+    actions:
+      review_topic: "トピックを復習"
+      continue: "続ける"
+      start_topic: "トピック開始"
+
+    # Topic show page
+    show:
+      grammar_points: "文法ポイント"
+      no_grammar_points: "あなたの%{level}レベルの文法ポイントはまだありません。"
+      written_challenge: "ライティングチャレンジ"
+      no_challenge: "このトピックのチャレンジはまだありません。"
+      journal_submitted: "日記提出済み"
+      write_response_placeholder: "ここに回答を書いてください..."
+      submit_journal: "日記を送信"
+      explanation: "説明"
+      examples: "例文"
+
+  # Journals
+  journals:
+    your_journals: "あなたの日記"
+    track_journey: "ライティングの旅を追跡"
+    total_entries: "総エントリー数"
+    with_feedback: "フィードバック付き"
+    journal_entry: "日記"
+
+    # Empty state
+    empty:
+      title: "ライティングの旅を始めよう"
+      description: "チャレンジを完了して最初の日記を作成し、言語スキルの向上を始めましょう。"
+      go_to_dashboard: "ダッシュボードへ"
+
+    # Journal show
+    show:
+      conversation_transcript: "会話のトランスクリプト"
+      feedback: "フィードバック"
+      waiting_feedback: "フィードバック待ち"
+      partner_not_responded: "パートナーはまだ返信していません"
+      write_feedback_placeholder: "フィードバックを書く..."
+      send_feedback: "フィードバックを送信"
+
+    # Journal edit (transcript)
+    edit:
+      transcript: "会話のトランスクリプト"
+      comments: "コメント"
+      no_comments: "コメントはまだありません"
+      select_text_comment: "テキストを選択してコメントを追加"
+      comment: "コメント"
+
+  # Challenges / Conversations
+  challenges:
+    conversation_practice: "会話練習"
+    conversation_topic: "会話トピック"
+    recording_instructions: "ボタンを押して会話の録音を開始してください。会話は後で確認できます。話す言語は2分ごとに切り替わります。ヒントはレコーダーの下をチェック！"
+    start_conversation_in: "%{language}で会話を始める"
+    switch_language: "言語を切り替え"
+    need_hint: "ヒントが必要？"
+    view_grammar_points: "この会話の文法ポイントを見る"
+    conversation_completed: "会話完了"
+
+  # Notifications
+  notifications:
+    title: "通知"
+    no_notifications: "通知はまだありません"
+    partner_interaction: "パートナーがあなたと交流すると、ここに表示されます"
+
+  # Authentication (Devise)
+  auth:
+    # Login
+    login:
+      title: "おかえりなさい"
+      subtitle: "ログインして言語学習を続けましょう"
+      button: "ログイン"
+      remember_me: "ログイン状態を保持"
+
+    # Registration
+    register:
+      title: "アカウント作成"
+      subtitle: "絆リングアに参加して言語学習の旅を始めましょう"
+      account_details: "アカウント情報"
+      language_preferences: "言語設定"
+      native_language_prompt: "母国語を選択"
+      learning_language_prompt: "学びたい言語を選択"
+      level_prompt: "現在のレベルを選択"
+      profile_photo: "プロフィール写真"
+      optional: "（任意）"
+      button: "アカウント作成"
+      characters_minimum: "%{count}文字以上"
+      fix_errors: "以下のエラーを修正してください："
+
+    # Edit profile
+    edit:
+      title: "%{resource}を編集"
+      waiting_confirmation: "確認待ち：%{email}"
+      password_blank_hint: "変更しない場合は空白のままにしてください"
+      current_password_hint: "変更を確認するために現在のパスワードが必要です"
+      cancel_account: "アカウントを削除"
+      unhappy: "退会しますか？"
+      confirm_cancel: "本当によろしいですか？"
+
+    # Links
+    links:
+      already_have_account: "すでにアカウントをお持ちですか？"
+      dont_have_account: "アカウントをお持ちでないですか？"
+      log_in: "ログイン"
+      sign_up: "新規登録"
+      forgot_password: "パスワードをお忘れですか？"
+      no_confirmation: "確認メールが届きませんでしたか？"
+      no_unlock: "ロック解除メールが届きませんでしたか？"
+      sign_in_with: "%{provider}でログイン"
+
+  # Alt text for images
+  alt:
+    your_avatar: "あなたのアバター"
+    partner_avatar: "%{name}さんのアバター"

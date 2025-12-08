@@ -4,8 +4,8 @@
       <div class="auth-card__icon auth-card__icon--teal">
         <i class="fas fa-sign-in-alt"></i>
       </div>
-      <h1 class="auth-card__title">Welcome Back</h1>
-      <p class="auth-card__subtitle">Log in to continue your language journey</p>
+      <h1 class="auth-card__title"><%= t('auth.login.title') %></h1>
+      <p class="auth-card__subtitle"><%= t('auth.login.subtitle') %></p>
     </div>
 
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
@@ -28,7 +28,7 @@
           <div class="auth-form__remember">
             <%= f.input :remember_me,
                         as: :boolean,
-                        label: "Remember me",
+                        label: t('auth.login.remember_me'),
                         wrapper_html: { class: "auth-form__checkbox-group" },
                         input_html: { class: "auth-form__checkbox" },
                         label_html: { class: "auth-form__checkbox-label" } %>
@@ -37,7 +37,7 @@
       </div>
 
       <div class="auth-form__actions">
-        <%= f.button :submit, "Log In", class: "auth-form__submit auth-form__submit--teal" %>
+        <%= f.button :submit, t('auth.login.button'), class: "auth-form__submit auth-form__submit--teal" %>
       </div>
     <% end %>
 

@@ -3,20 +3,20 @@
   <header class="dashboard-header">
     <div class="dashboard-header__greeting">
       <div class="dashboard-header__welcome">
-        <h1>Welcome back, <%= current_user.name.split.first %></h1>
-        <p>Continue your language journey</p>
+        <h1><%= t('dashboard.welcome_back', name: current_user.name.split.first) %></h1>
+        <p><%= t('dashboard.continue_journey') %></p>
       </div>
       <div class="dashboard-header__avatars">
         <div class="partnership-link">
           <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key, class: "avatar avatar--user", alt: "Your avatar" %>
+            <%= cl_image_tag current_user.photo.key, class: "avatar avatar--user", alt: t('alt.your_avatar') %>
           <% else %>
-            <%= image_tag "user.png", class: "avatar avatar--user", alt: "Your avatar" %>
+            <%= image_tag "user.png", class: "avatar avatar--user", alt: t('alt.your_avatar') %>
           <% end %>
           <% if @partner.photo.attached? %>
-            <%= cl_image_tag @partner.photo.key, class: "avatar avatar--partner", alt: "#{@partner.name}'s avatar" %>
+            <%= cl_image_tag @partner.photo.key, class: "avatar avatar--partner", alt: t('alt.partner_avatar', name: @partner.name) %>
           <% else %>
-            <%= image_tag "user.png", class: "avatar avatar--partner", alt: "Partner avatar" %>
+            <%= image_tag "user.png", class: "avatar avatar--partner", alt: t('alt.partner_avatar', name: @partner.name) %>
           <% end %>
         </div>
       </div>
@@ -37,7 +37,7 @@
               <% end %>
               <div class="topic-progress-card__overlay">
                 <div class="topic-progress-card__info">
-                  <span class="topic-progress-card__label">Current Topic</span>
+                  <span class="topic-progress-card__label"><%= t('dashboard.current_topic') %></span>
                   <h2 class="topic-progress-card__name"><%= @most_recent_topic.name %></h2>
                 </div>
                 <div class="topic-progress-card__ring">
@@ -59,15 +59,15 @@
 
           <div class="topic-progress-card__actions">
             <% if @progress_percentage >= 100 %>
-              <%= button_to 'Complete Topic',
+              <%= button_to t('dashboard.complete_topic'),
                 complete_topic_partnership_topic_path(@most_recent),
                 method: :patch,
-                data: { confirm: 'Are you sure you want to finish this topic?' },
+                data: { confirm: t('dashboard.complete_topic_confirm') },
                 class: 'topic-action-btn topic-action-btn--complete' %>
             <% end %>
             <%= link_to topics_path, class: "topic-action-btn topic-action-btn--change" do %>
               <i class="fas fa-exchange-alt"></i>
-              Change Topic
+              <%= t('dashboard.change_topic') %>
             <% end %>
           </div>
         </div>
@@ -76,7 +76,7 @@
       <!-- Progress Section -->
       <section class="dashboard-section">
         <div class="dashboard-section__header">
-          <h3 class="dashboard-section__title">Your Progress</h3>
+          <h3 class="dashboard-section__title"><%= t('dashboard.your_progress') %></h3>
         </div>
 
         <div class="progress-grid">
@@ -89,8 +89,8 @@
                 <%= image_tag "user.png", class: "progress-column__avatar", alt: "You" %>
               <% end %>
               <div>
-                <h4 class="progress-column__title">Your Tasks</h4>
-                <p class="progress-column__subtitle">Complete these to progress</p>
+                <h4 class="progress-column__title"><%= t('dashboard.your_tasks') %></h4>
+                <p class="progress-column__subtitle"><%= t('dashboard.complete_to_progress') %></p>
               </div>
             </div>
 
@@ -102,8 +102,8 @@
                     <i class="fas fa-book"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Journal Entry</p>
-                    <p class="task-item__subtitle">Your writing practice</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.journal_entry') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.your_writing') %></p>
                   </div>
                   <div class="task-item__status task-item__status--complete">
                     <i class="fas fa-check-circle"></i>
@@ -115,8 +115,8 @@
                     <i class="fas fa-book"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Journal Entry</p>
-                    <p class="task-item__subtitle">Write your entry</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.journal_entry') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.write_entry') %></p>
                   </div>
                   <div class="task-item__status task-item__status--incomplete">
                     <i class="fas fa-hourglass-half"></i>
@@ -132,8 +132,8 @@
                       <i class="fas fa-comments"></i>
                     </div>
                     <div class="task-item__content">
-                      <p class="task-item__title">Partner Guidance</p>
-                      <p class="task-item__subtitle">Feedback provided</p>
+                      <p class="task-item__title"><%= t('dashboard.tasks.partner_guidance') %></p>
+                      <p class="task-item__subtitle"><%= t('dashboard.tasks.feedback_provided') %></p>
                     </div>
                     <div class="task-item__status task-item__status--complete">
                       <i class="fas fa-check-circle"></i>
@@ -145,8 +145,8 @@
                       <i class="fas fa-comments"></i>
                     </div>
                     <div class="task-item__content">
-                      <p class="task-item__title">Partner Guidance</p>
-                      <p class="task-item__subtitle">Help your partner improve</p>
+                      <p class="task-item__title"><%= t('dashboard.tasks.partner_guidance') %></p>
+                      <p class="task-item__subtitle"><%= t('dashboard.tasks.help_partner') %></p>
                     </div>
                     <div class="task-item__status task-item__status--incomplete">
                       <i class="fas fa-hourglass-half"></i>
@@ -159,8 +159,8 @@
                     <i class="fas fa-comments"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Partner Guidance</p>
-                    <p class="task-item__subtitle">Waiting for partner's journal</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.partner_guidance') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.waiting_partner_journal') %></p>
                   </div>
                   <div class="task-item__status task-item__status--locked">
                     <i class="fas fa-lock"></i>
@@ -176,8 +176,8 @@
                       <i class="fas fa-microphone"></i>
                     </div>
                     <div class="task-item__content">
-                      <p class="task-item__title">Conversation</p>
-                      <p class="task-item__subtitle">Practice complete</p>
+                      <p class="task-item__title"><%= t('dashboard.tasks.conversation') %></p>
+                      <p class="task-item__subtitle"><%= t('dashboard.tasks.practice_complete') %></p>
                     </div>
                     <div class="task-item__status task-item__status--complete">
                       <i class="fas fa-check-circle"></i>
@@ -189,8 +189,8 @@
                       <i class="fas fa-microphone"></i>
                     </div>
                     <div class="task-item__content">
-                      <p class="task-item__title">Conversation</p>
-                      <p class="task-item__subtitle">Practice speaking</p>
+                      <p class="task-item__title"><%= t('dashboard.tasks.conversation') %></p>
+                      <p class="task-item__subtitle"><%= t('dashboard.tasks.practice_speaking') %></p>
                     </div>
                     <div class="task-item__status task-item__status--incomplete">
                       <i class="fas fa-hourglass-half"></i>
@@ -203,8 +203,8 @@
                     <i class="fas fa-microphone"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Conversation</p>
-                    <p class="task-item__subtitle">Complete journals first</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.conversation') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.complete_journals_first') %></p>
                   </div>
                   <div class="task-item__status task-item__status--locked">
                     <i class="fas fa-lock"></i>
@@ -223,8 +223,8 @@
                 <%= image_tag "user.png", class: "progress-column__avatar", alt: @partner.name %>
               <% end %>
               <div>
-                <h4 class="progress-column__title"><%= @partner.name.split.first %>'s Tasks</h4>
-                <p class="progress-column__subtitle">Partner progress</p>
+                <h4 class="progress-column__title"><%= t('dashboard.partner_tasks', name: @partner.name.split.first) %></h4>
+                <p class="progress-column__subtitle"><%= t('dashboard.partner_progress') %></p>
               </div>
             </div>
 
@@ -235,8 +235,8 @@
                   <i class="fas fa-book"></i>
                 </div>
                 <div class="task-item__content">
-                  <p class="task-item__title">Journal Entry</p>
-                  <p class="task-item__subtitle"><%= @partner_journal ? "Entry submitted" : "Not yet written" %></p>
+                  <p class="task-item__title"><%= t('dashboard.tasks.journal_entry') %></p>
+                  <p class="task-item__subtitle"><%= @partner_journal ? t('dashboard.tasks.entry_submitted') : t('dashboard.tasks.not_yet_written') %></p>
                 </div>
                 <div class="task-item__status <%= @partner_journal ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
                   <i class="fas <%= @partner_journal ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
@@ -250,8 +250,8 @@
                     <i class="fas fa-comments"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Your Feedback</p>
-                    <p class="task-item__subtitle"><%= @my_journal.feedback ? "Feedback received" : "Awaiting feedback" %></p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.your_feedback') %></p>
+                    <p class="task-item__subtitle"><%= @my_journal.feedback ? t('dashboard.tasks.feedback_received') : t('dashboard.tasks.awaiting_feedback') %></p>
                   </div>
                   <div class="task-item__status <%= @my_journal.feedback ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
                     <i class="fas <%= @my_journal.feedback ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
@@ -263,8 +263,8 @@
                     <i class="fas fa-comments"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Your Feedback</p>
-                    <p class="task-item__subtitle">Write journal first</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.your_feedback') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.write_journal_first') %></p>
                   </div>
                   <div class="task-item__status task-item__status--locked">
                     <i class="fas fa-lock"></i>
@@ -279,8 +279,8 @@
                     <i class="fas fa-microphone"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Conversation</p>
-                    <p class="task-item__subtitle"><%= @my_journal.conversation_status ? "Completed together" : "Ready to practice" %></p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.conversation') %></p>
+                    <p class="task-item__subtitle"><%= @my_journal.conversation_status ? t('dashboard.tasks.completed_together') : t('dashboard.tasks.ready_to_practice') %></p>
                   </div>
                   <div class="task-item__status <%= @my_journal.conversation_status ? 'task-item__status--complete' : 'task-item__status--incomplete' %>">
                     <i class="fas <%= @my_journal.conversation_status ? 'fa-check-circle' : 'fa-hourglass-half' %>"></i>
@@ -292,8 +292,8 @@
                     <i class="fas fa-microphone"></i>
                   </div>
                   <div class="task-item__content">
-                    <p class="task-item__title">Conversation</p>
-                    <p class="task-item__subtitle">Complete journals first</p>
+                    <p class="task-item__title"><%= t('dashboard.tasks.conversation') %></p>
+                    <p class="task-item__subtitle"><%= t('dashboard.tasks.complete_journals_first') %></p>
                   </div>
                   <div class="task-item__status task-item__status--locked">
                     <i class="fas fa-lock"></i>
@@ -313,11 +313,11 @@
           <div class="welcome-card__logo">
             <i class="fas fa-language"></i>
           </div>
-          <h2 class="welcome-card__title">Welcome to Kizuna Lingua</h2>
-          <p class="welcome-card__text">Start your language learning journey by choosing a topic to explore with your partner.</p>
+          <h2 class="welcome-card__title"><%= t('dashboard.welcome.title') %></h2>
+          <p class="welcome-card__text"><%= t('dashboard.welcome.description') %></p>
           <%= link_to topics_path, class: "welcome-card__cta" do %>
             <i class="fas fa-rocket"></i>
-            Choose a Topic
+            <%= t('dashboard.welcome.choose_topic') %>
           <% end %>
         </div>
       </section>

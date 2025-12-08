@@ -6,8 +6,8 @@
         <i class="fas fa-arrow-left"></i>
       <% end %>
       <div class="journals-index__title-group">
-        <h1 class="journals-index__title">Your Journals</h1>
-        <p class="journals-index__subtitle">Track your writing journey</p>
+        <h1 class="journals-index__title"><%= t('journals.your_journals') %></h1>
+        <p class="journals-index__subtitle"><%= t('journals.track_journey') %></p>
       </div>
     </div>
   </header>
@@ -22,7 +22,7 @@
           </div>
           <div class="journals-stat__content">
             <span class="journals-stat__number"><%= @journals.count %></span>
-            <span class="journals-stat__label">Total Entries</span>
+            <span class="journals-stat__label"><%= t('journals.total_entries') %></span>
           </div>
         </div>
         <div class="journals-stat journals-stat--feedback">
@@ -31,7 +31,7 @@
           </div>
           <div class="journals-stat__content">
             <span class="journals-stat__number"><%= @journals.select { |j| j.feedback.present? }.count %></span>
-            <span class="journals-stat__label">With Feedback</span>
+            <span class="journals-stat__label"><%= t('journals.with_feedback') %></span>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
               <div class="journal-card__footer">
                 <span class="journal-card__time">
                   <i class="fas fa-clock"></i>
-                  <%= time_ago_in_words(journal.created_at) %> ago
+                  <%= time_ago_in_words(journal.created_at) %> <%= t('common.ago') %>
                 </span>
                 <% if journal.feedback.present? %>
                   <span class="journal-card__badge journal-card__badge--success">
@@ -90,10 +90,10 @@
             <span class="decoration decoration--3"><i class="fas fa-lightbulb"></i></span>
           </div>
         </div>
-        <h2 class="journals-empty__title">Start Your Writing Journey</h2>
-        <p class="journals-empty__text">Complete a challenge to create your first journal entry and begin improving your language skills.</p>
+        <h2 class="journals-empty__title"><%= t('journals.empty.title') %></h2>
+        <p class="journals-empty__text"><%= t('journals.empty.description') %></p>
         <%= link_to dashboard_path, class: "journals-empty__cta" do %>
-          Go to Dashboard
+          <%= t('journals.empty.go_to_dashboard') %>
           <i class="fas fa-arrow-right"></i>
         <% end %>
       </div>
