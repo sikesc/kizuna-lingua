@@ -4,23 +4,23 @@
     <div class="landing-hero__content">
       <div class="landing-hero__badge">
         <i class="fas fa-globe-americas"></i>
-        Language Learning Reimagined
+        <%= t('landing.badge') %>
       </div>
       <h1 class="landing-hero__title">
-        Learn Languages<br>
-        <span class="landing-hero__highlight">Together</span>
+        <%= t('landing.title_line1') %><br>
+        <span class="landing-hero__highlight"><%= t('landing.title_line2') %></span>
       </h1>
       <p class="landing-hero__subtitle">
-        Connect with a partner to practice, write journals, give feedback, and have real conversations. Learning a language is better with a friend.
+        <%= t('landing.subtitle') %>
       </p>
       <div class="landing-hero__actions">
         <%= link_to new_user_registration_path, class: "landing-cta landing-cta--primary" do %>
           <i class="fas fa-rocket"></i>
-          Get Started For Free
+          <%= t('landing.get_started') %>
         <% end %>
         <%= link_to new_user_session_path, class: "landing-cta landing-cta--secondary" do %>
           <i class="fas fa-sign-in-alt"></i>
-          Log In
+          <%= t('landing.log_in') %>
         <% end %>
       </div>
     </div>
@@ -29,8 +29,8 @@
   <!-- Features Section -->
   <section class="landing-features">
     <div class="landing-features__header">
-      <h2 class="landing-features__title">How It Works</h2>
-      <p class="landing-features__subtitle">A structured approach to language learning with your partner</p>
+      <h2 class="landing-features__title"><%= t('landing.how_it_works.title') %></h2>
+      <p class="landing-features__subtitle"><%= t('landing.how_it_works.subtitle') %></p>
     </div>
 
     <div class="landing-features__grid">
@@ -38,24 +38,24 @@
         <div class="feature-card__icon feature-card__icon--coral">
           <i class="fas fa-book"></i>
         </div>
-        <h3 class="feature-card__title">Write Journals</h3>
-        <p class="feature-card__text">Practice writing in your target language with guided prompts based on topics you choose together.</p>
+        <h3 class="feature-card__title"><%= t('landing.features.write_journals.title') %></h3>
+        <p class="feature-card__text"><%= t('landing.features.write_journals.description') %></p>
       </div>
 
       <div class="feature-card">
         <div class="feature-card__icon feature-card__icon--teal">
           <i class="fas fa-comments"></i>
         </div>
-        <h3 class="feature-card__title">Give Feedback</h3>
-        <p class="feature-card__text">Help your partner improve by providing corrections and encouragement on their journal entries.</p>
+        <h3 class="feature-card__title"><%= t('landing.features.give_feedback.title') %></h3>
+        <p class="feature-card__text"><%= t('landing.features.give_feedback.description') %></p>
       </div>
 
       <div class="feature-card">
         <div class="feature-card__icon feature-card__icon--gold">
           <i class="fas fa-microphone"></i>
         </div>
-        <h3 class="feature-card__title">Have Conversations</h3>
-        <p class="feature-card__text">Practice speaking with structured conversation exercises designed around your current topic.</p>
+        <h3 class="feature-card__title"><%= t('landing.features.have_conversations.title') %></h3>
+        <p class="feature-card__text"><%= t('landing.features.have_conversations.description') %></p>
       </div>
     </div>
   </section>
@@ -66,22 +66,22 @@
       <div class="landing-partnership__icon">
         <i class="fas fa-handshake"></i>
       </div>
-      <h2 class="landing-partnership__title">The Power of Partnership</h2>
+      <h2 class="landing-partnership__title"><%= t('landing.partnership.title') %></h2>
       <p class="landing-partnership__text">
-        Kizuna means "bond" in Japanese. We believe the best way to learn a language is through meaningful connections with others who share your goals.
+        <%= t('landing.partnership.description') %>
       </p>
       <div class="landing-partnership__stats">
         <div class="stat-item">
           <span class="stat-item__number">2x</span>
-          <span class="stat-item__label">More Motivation</span>
+          <span class="stat-item__label"><%= t('landing.partnership.stats.motivation') %></span>
         </div>
         <div class="stat-item">
           <span class="stat-item__number">100%</span>
-          <span class="stat-item__label">Real Practice</span>
+          <span class="stat-item__label"><%= t('landing.partnership.stats.real_practice') %></span>
         </div>
         <div class="stat-item">
           <span class="stat-item__number">1</span>
-          <span class="stat-item__label">Partner Needed</span>
+          <span class="stat-item__label"><%= t('landing.partnership.stats.partner_needed') %></span>
         </div>
       </div>
     </div>
@@ -89,11 +89,11 @@
 
   <!-- CTA Section -->
   <section class="landing-cta-section">
-    <h2 class="landing-cta-section__title">Ready to Start Learning?</h2>
-    <p class="landing-cta-section__text">Join KizunaLingua and begin your language journey today.</p>
+    <h2 class="landing-cta-section__title"><%= t('landing.cta.title') %></h2>
+    <p class="landing-cta-section__text"><%= t('landing.cta.subtitle') %></p>
     <%= link_to new_user_registration_path, class: "landing-cta landing-cta--primary landing-cta--large" do %>
       <i class="fas fa-user-plus"></i>
-      Create Your Account
+      <%= t('landing.cta.create_account') %>
     <% end %>
   </section>
 </div>

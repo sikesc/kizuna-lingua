@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_notifications
+  before_action :set_locale
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -25,5 +26,13 @@ class ApplicationController < ActionController::Base
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
+  end
+
+  def set_locale
+    if current_user&.native_language.present?
+      I18n.locale = current_user.native_language == "japanese" ? :ja : :en
+    else
+      I18n.locale = I18n.default_locale
+    end
   end
 end

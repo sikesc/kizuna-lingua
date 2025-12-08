@@ -7,7 +7,7 @@
       <% end %>
       <div class="journal-edit__title-group">
         <h1 class="journal-edit__title"><%= @journal.challenge.topic.name %></h1>
-        <p class="journal-edit__subtitle">Conversation Transcript</p>
+        <p class="journal-edit__subtitle"><%= t('journals.edit.transcript') %></p>
       </div>
     </div>
   </header>
@@ -26,7 +26,7 @@
       <aside class="journal-edit__comments" data-comment-linker-target="comments">
         <div class="journal-edit__comments-header">
           <i class="fas fa-comments"></i>
-          <span>Comments</span>
+          <span><%= t('journals.edit.comments') %></span>
         </div>
         <div class="journal-edit__comments-list">
           <% if @journal.comments.any? %>
@@ -42,8 +42,8 @@
           <% else %>
             <div class="journal-edit__comments-empty">
               <i class="fas fa-comment-slash"></i>
-              <p>No comments yet</p>
-              <span>Select text to add a comment</span>
+              <p><%= t('journals.edit.no_comments') %></p>
+              <span><%= t('journals.edit.select_text_comment') %></span>
             </div>
           <% end %>
         </div>
@@ -56,7 +56,7 @@
       class="comment-floating-btn hidden"
       data-commentable-target="button"
       data-action="click->commentable#addComment">
-      <i class="fas fa-plus"></i> Comment
+      <i class="fas fa-plus"></i> <%= t('journals.edit.comment') %>
     </button>
   </main>
 </div>

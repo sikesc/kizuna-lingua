@@ -24,14 +24,14 @@
       <div class="section-header">
         <h2 class="section-header__title">
           <i class="fas fa-book-open"></i>
-          Grammar Points
+          <%= t('topics.show.grammar_points') %>
         </h2>
       </div>
 
       <% if @filtered_grammar_points.empty? %>
         <div class="empty-message">
           <i class="fas fa-info-circle"></i>
-          <p>No grammar points are available for your <%= current_user.learning_level %> level yet.</p>
+          <p><%= t('topics.show.no_grammar_points', level: current_user.learning_level) %></p>
         </div>
       <% else %>
         <div class="accordion grammar-accordion" id="grammarPointsAccordion">
@@ -51,14 +51,14 @@
                     <div class="grammar-content__block">
                       <h4 class="grammar-content__label">
                         <i class="fas fa-lightbulb"></i>
-                        Explanation
+                        <%= t('topics.show.explanation') %>
                       </h4>
                       <p class="grammar-content__text"><%= grammar_point.explanation %></p>
                     </div>
                     <div class="grammar-content__block">
                       <h4 class="grammar-content__label">
                         <i class="fas fa-quote-left"></i>
-                        Examples
+                        <%= t('topics.show.examples') %>
                       </h4>
                       <p class="grammar-content__text"><%= grammar_point.examples %></p>
                     </div>
@@ -76,7 +76,7 @@
       <div class="section-header">
         <h2 class="section-header__title">
           <i class="fas fa-pen-fancy"></i>
-          Written Challenge
+          <%= t('topics.show.written_challenge') %>
         </h2>
       </div>
 
@@ -98,7 +98,7 @@
               <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 0.75rem; padding: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                   <i class="fas fa-check-circle" style="color: #22C55E;"></i>
-                  <span style="font-size: 0.875rem; font-weight: 600; color: #166534;">Journal Submitted</span>
+                  <span style="font-size: 0.875rem; font-weight: 600; color: #166534;"><%= t('topics.show.journal_submitted') %></span>
                 </div>
                 <div style="font-size: 1rem; line-height: 1.7; color: #334155;">
                   <%= simple_format(@existing_journal.content) %>
@@ -108,11 +108,11 @@
           <% else %>
             <div class="challenge-card__form">
               <%= simple_form_for [@challenge, @journal] do |f| %>
-                <%= f.input :content, as: :text, input_html: { rows: 6, class: "challenge-textarea" }, label: false, placeholder: "Write your response here..." %>
+                <%= f.input :content, as: :text, input_html: { rows: 6, class: "challenge-textarea" }, label: false, placeholder: t('topics.show.write_response_placeholder') %>
                 <div class="challenge-card__actions">
                   <%= f.button :submit, class: "btn-submit" do %>
                     <i class="fas fa-paper-plane"></i>
-                    Submit Journal
+                    <%= t('topics.show.submit_journal') %>
                   <% end %>
                 </div>
               <% end %>
@@ -122,7 +122,7 @@
       <% else %>
         <div class="empty-message">
           <i class="fas fa-info-circle"></i>
-          <p>No challenge available for this topic yet.</p>
+          <p><%= t('topics.show.no_challenge') %></p>
         </div>
       <% end %>
     </section>

@@ -1,30 +1,264 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
+  app_name: "KizunaLingua"
+
+  # Common
+  common:
+    back: "Back"
+    cancel: "Cancel"
+    submit: "Submit"
+    save: "Save"
+    update: "Update"
+    delete: "Delete"
+    edit: "Edit"
+    view: "View"
+    ago: "ago"
+    or: "or"
+
+  # Languages
+  languages:
+    english: "English"
+    japanese: "Japanese"
+
+  # Proficiency levels
+  levels:
+    beginner: "Beginner"
+    intermediate: "Intermediate"
+    advanced: "Advanced"
+
+  # Navigation
+  nav:
+    home: "Home"
+    messages: "Messages"
+    login: "Login"
+    profile: "Profile"
+    select_new_topic: "Select New Topic"
+    sign_out: "Sign out"
+    log_out: "Log out"
+    action: "Action"
+    another_action: "Another action"
+
+  # Footer
+  footer:
+    notifications: "Notifications"
+
+  # Landing page
+  landing:
+    badge: "Language Learning Reimagined"
+    title_line1: "Learn Languages"
+    title_line2: "Together"
+    subtitle: "Connect with a partner to practice, write journals, give feedback, and have real conversations. Learning a language is better with a friend."
+    get_started: "Get Started For Free"
+    log_in: "Log In"
+
+    # How it works section
+    how_it_works:
+      title: "How It Works"
+      subtitle: "A structured approach to language learning with your partner"
+
+    # Features
+    features:
+      write_journals:
+        title: "Write Journals"
+        description: "Practice writing in your target language with guided prompts based on topics you choose together."
+      give_feedback:
+        title: "Give Feedback"
+        description: "Help your partner improve by providing corrections and encouragement on their journal entries."
+      have_conversations:
+        title: "Have Conversations"
+        description: "Practice speaking with structured conversation exercises designed around your current topic."
+
+    # Partnership section
+    partnership:
+      title: "The Power of Partnership"
+      description: "Kizuna means \"bond\" in Japanese. We believe the best way to learn a language is through meaningful connections with others who share your goals."
+      stats:
+        motivation: "More Motivation"
+        real_practice: "Real Practice"
+        partner_needed: "Partner Needed"
+
+    # CTA section
+    cta:
+      title: "Ready to Start Learning?"
+      subtitle: "Join KizunaLingua and begin your language journey today."
+      create_account: "Create Your Account"
+
+  # Dashboard
+  dashboard:
+    welcome_back: "Welcome back, %{name}"
+    continue_journey: "Continue your language journey"
+    current_topic: "Current Topic"
+    your_progress: "Your Progress"
+    complete_to_progress: "Complete these to progress"
+    your_tasks: "Your Tasks"
+    partner_tasks: "%{name}'s Tasks"
+    partner_progress: "Partner progress"
+
+    # Task items
+    tasks:
+      journal_entry: "Journal Entry"
+      your_writing: "Your writing practice"
+      write_entry: "Write your entry"
+      partner_guidance: "Partner Guidance"
+      feedback_provided: "Feedback provided"
+      help_partner: "Help your partner improve"
+      waiting_partner_journal: "Waiting for partner's journal"
+      conversation: "Conversation"
+      practice_complete: "Practice complete"
+      practice_speaking: "Practice speaking"
+      complete_journals_first: "Complete journals first"
+      entry_submitted: "Entry submitted"
+      not_yet_written: "Not yet written"
+      your_feedback: "Your Feedback"
+      feedback_received: "Feedback received"
+      awaiting_feedback: "Awaiting feedback"
+      write_journal_first: "Write journal first"
+      completed_together: "Completed together"
+      ready_to_practice: "Ready to practice"
+
+    # Topic actions
+    complete_topic: "Complete Topic"
+    complete_topic_confirm: "Are you sure you want to finish this topic?"
+    change_topic: "Change Topic"
+
+    # Welcome state
+    welcome:
+      title: "Welcome to Kizuna Lingua"
+      description: "Start your language learning journey by choosing a topic to explore with your partner."
+      choose_topic: "Choose a Topic"
+
+  # Topics
+  topics:
+    explore: "Explore Topics"
+    choose_subtitle: "Choose a topic to learn with your partner"
+    search_placeholder: "Search topics..."
+    filters:
+      all: "All"
+      new: "New"
+      in_progress: "In Progress"
+      completed: "Completed"
+    generate_new: "Generate a New Topic"
+    title_label: "Title for your new topic"
+    title_placeholder: "e.g., 'Planning a Trip', 'Favorite Books'"
+    create_topic: "Create Topic"
+
+    # Topic status
+    status:
+      completed: "Completed"
+      in_progress: "In Progress"
+      new: "New"
+
+    # Topic modal actions
+    actions:
+      review_topic: "Review Topic"
+      continue: "Continue"
+      start_topic: "Start Topic"
+
+    # Topic show page
+    show:
+      grammar_points: "Grammar Points"
+      no_grammar_points: "No grammar points are available for your %{level} level yet."
+      written_challenge: "Written Challenge"
+      no_challenge: "No challenge available for this topic yet."
+      journal_submitted: "Journal Submitted"
+      write_response_placeholder: "Write your response here..."
+      submit_journal: "Submit Journal"
+      explanation: "Explanation"
+      examples: "Examples"
+
+  # Journals
+  journals:
+    your_journals: "Your Journals"
+    track_journey: "Track your writing journey"
+    total_entries: "Total Entries"
+    with_feedback: "With Feedback"
+    journal_entry: "Journal Entry"
+
+    # Empty state
+    empty:
+      title: "Start Your Writing Journey"
+      description: "Complete a challenge to create your first journal entry and begin improving your language skills."
+      go_to_dashboard: "Go to Dashboard"
+
+    # Journal show
+    show:
+      conversation_transcript: "Conversation Transcript"
+      feedback: "Feedback"
+      waiting_feedback: "Waiting for feedback"
+      partner_not_responded: "Your partner hasn't responded yet"
+      write_feedback_placeholder: "Write your feedback..."
+      send_feedback: "Send Feedback"
+
+    # Journal edit (transcript)
+    edit:
+      transcript: "Conversation Transcript"
+      comments: "Comments"
+      no_comments: "No comments yet"
+      select_text_comment: "Select text to add a comment"
+      comment: "Comment"
+
+  # Challenges / Conversations
+  challenges:
+    conversation_practice: "Conversation Practice"
+    conversation_topic: "Conversation Topic"
+    recording_instructions: "Press the button to start recording your conversation. Your conversation can be reviewed at a later time. The speaking language will change every 2 minutes. Check below the recorder for a hint!"
+    start_conversation_in: "Start Conversation in %{language}"
+    switch_language: "Switch Language"
+    need_hint: "Need a Hint?"
+    view_grammar_points: "View grammar points for this conversation"
+    conversation_completed: "Conversation Completed"
+
+  # Notifications
+  notifications:
+    title: "Notifications"
+    no_notifications: "No notifications yet"
+    partner_interaction: "When your partner interacts with you, you'll see it here"
+
+  # Authentication (Devise)
+  auth:
+    # Login
+    login:
+      title: "Welcome Back"
+      subtitle: "Log in to continue your language journey"
+      button: "Log In"
+      remember_me: "Remember me"
+
+    # Registration
+    register:
+      title: "Create Account"
+      subtitle: "Join KizunaLingua and start your language journey"
+      account_details: "Account Details"
+      language_preferences: "Language Preferences"
+      native_language_prompt: "Select your native language"
+      learning_language_prompt: "Select the language you want to learn"
+      level_prompt: "Select your current level"
+      profile_photo: "Profile Photo"
+      optional: "(optional)"
+      button: "Create Account"
+      characters_minimum: "%{count} characters minimum"
+      fix_errors: "Please fix the errors below:"
+
+    # Edit profile
+    edit:
+      title: "Edit %{resource}"
+      waiting_confirmation: "Currently waiting confirmation for: %{email}"
+      password_blank_hint: "leave it blank if you don't want to change it"
+      current_password_hint: "we need your current password to confirm your changes"
+      cancel_account: "Cancel my account"
+      unhappy: "Unhappy?"
+      confirm_cancel: "Are you sure?"
+
+    # Links
+    links:
+      already_have_account: "Already have an account?"
+      dont_have_account: "Don't have an account?"
+      log_in: "Log in"
+      sign_up: "Sign up"
+      forgot_password: "Forgot your password?"
+      no_confirmation: "Didn't receive confirmation instructions?"
+      no_unlock: "Didn't receive unlock instructions?"
+      sign_in_with: "Sign in with %{provider}"
+
+  # Alt text for images
+  alt:
+    your_avatar: "Your avatar"
+    partner_avatar: "%{name}'s avatar"
