@@ -55,6 +55,7 @@ rails s
 ## Team Members
 - [Matias Fernandez](https://github.com/matiifernandez)
 - [Lorenzo Panneman](https://github.com/lormanzo3)
+- [Colton Sikes](https://github.com/sikesc)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
