@@ -1,11 +1,14 @@
+puts "=" * 50
 puts "Cleaning up the database..."
+puts "=" * 50
 TopicGrammarPoint.destroy_all
 PartnershipTopic.destroy_all
-Topic.destroy_all
+Comment.destroy_all
+Journal.destroy_all
 Challenge.destroy_all
+Topic.destroy_all
 GrammarPoint.destroy_all
 Partnership.destroy_all
-Journal.destroy_all
 User.destroy_all
 puts "database cleaned"
 
