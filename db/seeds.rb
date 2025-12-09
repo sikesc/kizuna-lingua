@@ -1,4 +1,6 @@
+puts "=" * 50
 puts "Cleaning up the database..."
+puts "=" * 50
 TopicGrammarPoint.destroy_all
 PartnershipTopic.destroy_all
 Comment.destroy_all
